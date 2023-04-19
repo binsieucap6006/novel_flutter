@@ -15,7 +15,7 @@ class TrendingNovelWidget extends StatelessWidget {
             //Single Item
             for (int i = 0; i <= 6; i++)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 7),
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Container(
                   width: 170,
                   height: 235,
@@ -31,8 +31,7 @@ class TrendingNovelWidget extends StatelessWidget {
                         ),
                       ]),
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -41,30 +40,31 @@ class TrendingNovelWidget extends StatelessWidget {
                           child: Image.asset(
                             "assets/images/Capture1.PNG",
                             height: 120,
+                            //fit: BoxFit.cover,
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
+                        const SizedBox(
+                          height: 5,
                         ),
                         const Text(
                           "Greatest Novel Ever",
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 5),
                         const Text(
-                          "Chapter",
-                          style: TextStyle(fontSize: 14),
+                          "9999 Views",
+                          style: TextStyle(fontSize: 10, color: Colors.grey),
                         ),
-                        //const SizedBox(height: 2),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "10",
+                              " Chapter: 10",
                               style: TextStyle(
-                                fontSize: 12,
-                              ),
+                                  fontSize: 10,
+                                  color: Colors.purple.withOpacity(0.7),
+                                  fontWeight: FontWeight.bold),
                             ),
                             TextButton(
                               style: TextButton.styleFrom(
@@ -81,9 +81,9 @@ class TrendingNovelWidget extends StatelessWidget {
                                 );
                               },
                               child: const Text(
-                                'More',
+                                'READ NOW',
                                 style: TextStyle(
-                                  color: Colors.grey,
+                                  color: Colors.purple,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

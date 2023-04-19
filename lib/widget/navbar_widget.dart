@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:novel_flutter/routes/routes.dart';
+import 'package:novel_flutter/screens/Login/login_screen.dart';
+import 'package:novel_flutter/screens/Signup/signup_screen.dart';
 
-enum SampleItem { itemOne, itemTwo, itemThree }
+enum SampleItem { itemOne, itemTwo }
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -31,16 +34,29 @@ class NavBar extends StatelessWidget {
               ),
               //child: const Icon(CupertinoIcons.bars),
               child: PopupMenuButton<SampleItem>(
+                onSelected: (Enum selectedItem) {
+                  if (selectedItem == SampleItem.itemOne) {
+                    Navigator.of(context).pushNamed(Routes.LOGIN);
+                  } else if (selectedItem == SampleItem.itemTwo) {
+                    Navigator.of(context).pushNamed(Routes.SIGN_UP);
+                  }
+                },
                 icon: const Icon(CupertinoIcons.bars),
                 itemBuilder: (BuildContext context) =>
                     <PopupMenuEntry<SampleItem>>[
-                  const PopupMenuItem<SampleItem>(
+                  PopupMenuItem<SampleItem>(
                     value: SampleItem.itemOne,
-                    child: Text('Item 1'),
+                    child: const Text('Log in'),
+                    // onTap: () {
+                    //   Navigator.of(context).pushNamed(Routes.LOGIN);
+                    // },
                   ),
-                  const PopupMenuItem<SampleItem>(
+                  PopupMenuItem<SampleItem>(
                     value: SampleItem.itemTwo,
-                    child: Text('Item 2'),
+                    child: const Text('Sign up'),
+                    // onTap: () {
+                    //   Navigator.of(context).pushNamed(Routes.SIGN_UP);
+                    // },
                   ),
                 ],
               ),

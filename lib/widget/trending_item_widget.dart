@@ -15,7 +15,7 @@ class TrendingItemWidget extends StatelessWidget {
         for (int i = 0; i < 10; i++)
           Container(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 13),
+            margin: const EdgeInsets.symmetric(vertical: 11, horizontal: 16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Colors.white,
@@ -36,32 +36,32 @@ class TrendingItemWidget extends StatelessWidget {
                     child: Image.asset(
                       //"images/${img[i]}.png",
                       "assets/images/Capture1.PNG",
-                      width: 140,
+                      width: 150,
                       height: 120,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.fitWidth,
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10, top: 16),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           "Best Novel Ever",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Text(
-                          "Nice description",
+                          "Nice description, Nice description, Nice description, Nice description, Nice description, Nice description,",
                           style: TextStyle(
                             fontSize: 10,
-                            color: Colors.grey,
+                            color: Colors.purple.withOpacity(0.5),
                           ),
                         ),
                       ],
@@ -69,14 +69,14 @@ class TrendingItemWidget extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  padding: const EdgeInsets.only(bottom: 1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "9999 Views",
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 12,
                           color: Colors.grey,
                         ),
                       ),
@@ -95,7 +95,7 @@ class TrendingItemWidget extends StatelessWidget {
                         child: const Text(
                           'READ NOW',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Colors.purple,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

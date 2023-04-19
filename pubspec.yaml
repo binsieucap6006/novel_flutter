@@ -12,6 +12,7 @@ dependencies:
   flutter_image_slideshow: ^0.1.5
   flutter_rating_bar: ^4.0.1
   cupertino_icons: ^1.0.2
+  flutter_svg: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -21,4 +22,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/Capture1.PNG
-    - assets/images/Capture1.PNG
+    - assets/images/
+    - assets/icons/

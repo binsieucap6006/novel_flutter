@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../components/background.dart';
+
 class DetailsPage extends StatelessWidget {
   String img;
   DetailsPage(this.img, {super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+    return Background(
+      child: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -84,7 +86,7 @@ class DetailsPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 Padding(
-                  padding: EdgeInsets.only(left: 25, right: 40),
+                  padding: const EdgeInsets.only(left: 25, right: 40),
                   child: Row(
                     children: const [
                       Padding(
@@ -104,8 +106,8 @@ class DetailsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 30),
-                Padding(
+                const SizedBox(height: 30),
+                const Padding(
                   padding: EdgeInsets.only(left: 25, right: 40),
                   child: Text(
                     "Chapters",
@@ -115,22 +117,39 @@ class DetailsPage extends StatelessWidget {
                         color: Colors.grey),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 for (int i = 0; i < 10; i++)
                   Padding(
-                    padding: EdgeInsets.only(left: 25, right: 40),
+                    padding: const EdgeInsets.only(left: 25, right: 40),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Chapter ${i}",
-                          style: TextStyle(fontSize: 14),
+                          "Chapter $i",
+                          style: const TextStyle(fontSize: 14),
                         ),
-                        SizedBox(width: 250),
-                        Text(
-                          "READ NOW",
-                          style: TextStyle(fontSize: 14),
+                        const SizedBox(width: 220),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: const TextStyle(fontSize: 16),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    DetailsPage("Best Novel Ever"),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'READ NOW',
+                            style: TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        SizedBox(height: 40),
+                        const SizedBox(height: 40),
                       ],
                     ),
                   ),

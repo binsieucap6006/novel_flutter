@@ -87,9 +87,9 @@ class LatestNovelWidget extends StatelessWidget {
                             );
                           },
                           child: const Text(
-                            'More',
+                            'READ NOW',
                             style: TextStyle(
-                              color: Colors.grey,
+                              color: Colors.purple,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

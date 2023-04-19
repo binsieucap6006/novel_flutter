@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:novel_flutter/constants.dart';
+import 'package:novel_flutter/routes/app_pages.dart';
+import 'package:novel_flutter/screens/Login/login_screen.dart';
+import 'package:novel_flutter/screens/Signup/signup_screen.dart';
 import 'package:novel_flutter/screens/details_page.dart';
 import 'package:novel_flutter/screens/home_page.dart';
 import 'package:novel_flutter/screens/trending_page.dart';
@@ -13,7 +17,7 @@ import 'package:novel_flutter/screens/trending_page.dart';
 // }
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   static const String title = 'Novel';
   const MyApp({super.key});
   @override
@@ -21,11 +25,77 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: title,
           theme: ThemeData(
-              //primaryColor: Colors.purple,
+            primaryColor: kPrimaryColor,
+            scaffoldBackgroundColor: Colors.white,
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                elevation: 0,
+                backgroundColor: kPrimaryColor,
+                shape: const StadiumBorder(),
+                maximumSize: const Size(double.infinity, 56),
+                minimumSize: const Size(double.infinity, 56),
               ),
-          //home: const MainPage(title: title),
+            ),
+            inputDecorationTheme: const InputDecorationTheme(
+              filled: true,
+              fillColor: kPrimaryLightColor,
+              iconColor: kPrimaryColor,
+              prefixIconColor: kPrimaryColor,
+              contentPadding: EdgeInsets.symmetric(
+                  horizontal: defaultPadding, vertical: defaultPadding),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
           routes: {
-            "/": (context) => HomePage(),
-            "/trending": (context) => TrendingPage(),
+            "/": (context) => const HomePage(),
+            "/trending": (context) => const TrendingPage(),
+            //"/login": (context) => const LoginScreen(),
+            //"/signup": (context) => const SignUpScreen(),
+            //"/": (context) => const LoginScreen(),
+            //"/": (context) => const SignUpScreen(),
           });
+
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final AppRouter _appRouter = AppRouter();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Novel Flutter",
+      theme: ThemeData(
+        primaryColor: kPrimaryColor,
+        scaffoldBackgroundColor: Colors.white,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            backgroundColor: kPrimaryColor,
+            shape: const StadiumBorder(),
+            maximumSize: const Size(double.infinity, 56),
+            minimumSize: const Size(double.infinity, 56),
+          ),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          filled: true,
+          fillColor: kPrimaryLightColor,
+          iconColor: kPrimaryColor,
+          prefixIconColor: kPrimaryColor,
+          contentPadding: EdgeInsets.symmetric(
+              horizontal: defaultPadding, vertical: defaultPadding),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+            borderSide: BorderSide.none,
+          ),
+        ),
+      ),
+      onGenerateRoute: _appRouter.onGenerateRoute,
+    );
+  }
 }
