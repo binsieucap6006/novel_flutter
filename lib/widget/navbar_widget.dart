@@ -10,10 +10,12 @@ class NavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        InkWell(
-          onTap: () {},
-          child: Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            onTap: () {},
+            child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -41,28 +43,39 @@ class NavBar extends StatelessWidget {
                     child: Text('Item 2'),
                   ),
                 ],
-              )),
-        ),
-        InkWell(
-          onTap: () {},
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 10,
-                  offset: const Offset(0, 3),
-                )
-              ],
+              ),
             ),
-            child: const Icon(Icons.notifications),
           ),
-        ),
-      ]),
+          const Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 10,
+            ),
+            child: Text(
+              "Novel Reader",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          InkWell(
+            onTap: () {},
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  )
+                ],
+              ),
+              child: const Icon(Icons.notifications),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

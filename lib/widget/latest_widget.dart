@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:novel_flutter/screens/details_page.dart';
 
 class LatestNovelWidget extends StatelessWidget {
   const LatestNovelWidget({super.key});
@@ -73,12 +74,24 @@ class LatestNovelWidget extends StatelessWidget {
                           ),
                           onRatingUpdate: (index) {},
                         ),
-                        const Text(
-                          "READ NOW",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey,
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: const TextStyle(fontSize: 20),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    DetailsPage("Nice Novel Name"),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'More',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],

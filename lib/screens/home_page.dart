@@ -66,14 +66,41 @@ class HomePage extends StatelessWidget {
             ),
           ),
           //const SubMenuWidget(),
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(top: 20, left: 10),
-            child: Text(
-              "Trending",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
+            // child: Text(
+            //   "Trending",
+            //   style: TextStyle(
+            //     fontWeight: FontWeight.bold,
+            //     fontSize: 20,
+            //   ),
+            // ),
+            child: Row(
+              children: [
+                Text(
+                  "Trending",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(width: 250),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/trending');
+                  },
+                  child: const Text(
+                    'More',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           const TrendingNovelWidget(),
