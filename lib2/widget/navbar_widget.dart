@@ -47,10 +47,16 @@ class NavBar extends StatelessWidget {
                   PopupMenuItem<SampleItem>(
                     value: SampleItem.itemOne,
                     child: const Text('Log in'),
+                    // onTap: () {
+                    //   Navigator.of(context).pushNamed(Routes.LOGIN);
+                    // },
                   ),
                   PopupMenuItem<SampleItem>(
                     value: SampleItem.itemTwo,
                     child: const Text('Sign up'),
+                    // onTap: () {
+                    //   Navigator.of(context).pushNamed(Routes.SIGN_UP);
+                    // },
                   ),
                 ],
               ),

@@ -4,7 +4,6 @@ import 'package:novel_flutter/widget/navbar_widget.dart';
 import 'package:novel_flutter/widget/trending_bar_widget.dart';
 
 import '../components/background.dart';
-import '../constants.dart';
 import '../widget/latest_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -33,14 +32,13 @@ class HomePage extends StatelessWidget {
                   "Trending",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: kPrimaryColor,
+                    fontSize: 20,
                   ),
                 ),
                 const SizedBox(width: 250),
                 TextButton(
                   style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 25),
+                    textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/trending');
@@ -63,8 +61,7 @@ class HomePage extends StatelessWidget {
               "Latest",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: kPrimaryColor,
+                fontSize: 20,
               ),
             ),
           ),

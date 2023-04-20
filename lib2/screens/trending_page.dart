@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:novel_flutter/widget/trending_item_widget.dart';
 
 import '../components/background.dart';
-import '../constants.dart';
 import '../widget/header_widget.dart';
 
 class TrendingPage extends StatelessWidget {
@@ -19,9 +18,8 @@ class TrendingPage extends StatelessWidget {
           child: Text(
             "Trending now",
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: kPrimaryColor,
             ),
           ),
         ),

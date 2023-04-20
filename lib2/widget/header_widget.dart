@@ -3,8 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
 
@@ -19,7 +17,7 @@ class HeaderWidget extends StatelessWidget {
         width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
-            color: kPrimaryLightColor,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
@@ -37,7 +35,7 @@ class HeaderWidget extends StatelessWidget {
             children: [
               const Icon(
                 CupertinoIcons.search,
-                color: kPrimaryColor,
+                color: Colors.purple,
                 size: 30,
               ),
               SizedBox(
@@ -51,12 +49,12 @@ class HeaderWidget extends StatelessWidget {
                     decoration: const InputDecoration(
                       hintText: "What would you like to read?",
                       border: InputBorder.none,
-                      fillColor: kPrimaryLightColor,
+                      fillColor: Colors.white,
                     ),
                   ),
                 ),
               ),
-              const Icon(Icons.filter_list, color: kPrimaryColor),
+              const Icon(Icons.filter_list),
             ],
           ),
         ),

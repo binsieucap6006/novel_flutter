@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:novel_flutter/screens/details_page.dart';
 
-import '../constants.dart';
-
 class LatestNovelWidget extends StatelessWidget {
   const LatestNovelWidget({super.key});
 
@@ -60,7 +58,6 @@ class LatestNovelWidget extends StatelessWidget {
                           "This Novel has really cool story description",
                           style: TextStyle(
                             fontSize: 12,
-                            color: kPrimaryColor,
                           ),
                         ),
                         RatingBar.builder(
@@ -92,7 +89,7 @@ class LatestNovelWidget extends StatelessWidget {
                           child: const Text(
                             'READ NOW',
                             style: TextStyle(
-                              color: kPrimaryColor,
+                              color: Colors.purple,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

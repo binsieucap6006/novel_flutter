@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:novel_flutter/screens/details_page.dart';
 
-import '../constants.dart';
-
 class TrendingItemWidget extends StatelessWidget {
   const TrendingItemWidget({super.key});
 
@@ -63,7 +61,7 @@ class TrendingItemWidget extends StatelessWidget {
                           "Nice description, Nice description, Nice description, Nice description, Nice description, Nice description,",
                           style: TextStyle(
                             fontSize: 10,
-                            color: kPrimaryColor,
+                            color: Colors.purple.withOpacity(0.5),
                           ),
                         ),
                       ],
@@ -79,6 +77,7 @@ class TrendingItemWidget extends StatelessWidget {
                         "9999 Views",
                         style: TextStyle(
                           fontSize: 12,
+                          color: Colors.grey,
                         ),
                       ),
                       TextButton(
@@ -96,7 +95,7 @@ class TrendingItemWidget extends StatelessWidget {
                         child: const Text(
                           'READ NOW',
                           style: TextStyle(
-                            color: kPrimaryColor,
+                            color: Colors.purple,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

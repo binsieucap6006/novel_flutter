@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:novel_flutter/screens/Chapter/chapter_screen.dart';
 
 import '../components/background.dart';
-import '../constants.dart';
+import 'Chapter/chapter_screen.dart';
 
 class DetailsPage extends StatelessWidget {
   String img;
@@ -25,7 +24,7 @@ class DetailsPage extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.arrow_back_ios_new,
-                      color: kPrimaryColor,
+                      color: Colors.grey.withOpacity(0.5),
                     ),
                   ),
                 ),
@@ -58,7 +57,7 @@ class DetailsPage extends StatelessWidget {
                             "Categories: ",
                             style: TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 10),
@@ -96,7 +95,6 @@ class DetailsPage extends StatelessWidget {
                         child: Icon(
                           Icons.bookmark,
                           size: 40,
-                          color: kPrimaryColor,
                         ),
                       ),
                       Padding(
@@ -104,7 +102,6 @@ class DetailsPage extends StatelessWidget {
                         child: Icon(
                           Icons.thumb_up,
                           size: 40,
-                          color: kPrimaryColor,
                         ),
                       ),
                     ],
@@ -147,7 +144,7 @@ class DetailsPage extends StatelessWidget {
                           child: const Text(
                             'READ NOW',
                             style: TextStyle(
-                              color: kPrimaryColor,
+                              color: Colors.purple,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

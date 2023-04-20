@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:novel_flutter/screens/details_page.dart';
 
-import '../constants.dart';
-
 class TrendingNovelWidget extends StatelessWidget {
   const TrendingNovelWidget({super.key});
 
@@ -45,49 +43,39 @@ class TrendingNovelWidget extends StatelessWidget {
                             //fit: BoxFit.cover,
                           ),
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
+                        const SizedBox(height: 6),
                         const Text(
                           "Greatest Novel Ever",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              " Chapter: 8",
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.bold),
+                        const Text(
+                          "Chapter 10",
+                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: const TextStyle(
+                              fontSize: 16,
                             ),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                textStyle: const TextStyle(
-                                  fontSize: 16,
-                                ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    DetailsPage("Greatest Novel Ever"),
                               ),
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        DetailsPage("Greatest Novel Ever"),
-                                  ),
-                                );
-                              },
-                              child: const Text(
-                                'READ NOW',
-                                style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                            );
+                          },
+                          child: const Text(
+                            'READ NOW',
+                            style: TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
-                        )
+                          ),
+                        ),
                       ],
                     ),
                   ),
