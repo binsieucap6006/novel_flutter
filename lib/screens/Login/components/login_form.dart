@@ -3,12 +3,36 @@ import 'package:novel_flutter/screens/home_page.dart';
 
 import '../../../components/already_have_an_account_acheck.dart';
 import '../../../constants.dart';
+import '../../../routes/routes.dart';
 import '../../Signup/signup_screen.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({
     Key? key,
   }) : super(key: key);
+
+  @override
+  _LoginFormState createState() {
+    return _LoginFormState();
+  }
+}
+
+class _LoginFormState extends State<LoginForm> {
+  TextEditingController emailController = TextEditingController();
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    emailController.dispose();
+    super.dispose();
+  }
+
+  String text = "admin";
+
+  void _setText() {
+    setState(() {
+      text = emailController.text;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +40,7 @@ class LoginForm extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
@@ -48,11 +73,21 @@ class LoginForm extends StatelessWidget {
             tag: "login_btn",
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(),
-                  ),
-                );
+                if (Text(text) == "admin")
+                  Navigator.of(context).pushNamed(Routes.ADMIN);
+                else
+                  Navigator.of(context).pushNamed("/");
+                //Navigator.of(context).pushNamed(Routes.ADMIN);
+                // showDialog(
+                //   context: context,
+                //   builder: (context) {
+                //     return AlertDialog(
+                //       // Retrieve the text that the user has entered by using the
+                //       // TextEditingController.
+                //       content: Text(emailController.text),
+                //     );
+                //   },
+                // );
               },
               child: Text(
                 "Login".toUpperCase(),

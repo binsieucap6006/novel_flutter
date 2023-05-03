@@ -3,6 +3,7 @@ import 'package:novel_flutter/screens/Chapter/chapter_screen.dart';
 
 import '../components/background.dart';
 import '../constants.dart';
+import '../routes/routes.dart';
 
 class DetailsPage extends StatelessWidget {
   String img;
@@ -90,13 +91,18 @@ class DetailsPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 25, right: 40),
                   child: Row(
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.only(left: 40),
-                        child: Icon(
-                          Icons.bookmark,
-                          size: 40,
-                          color: kPrimaryColor,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(Routes.BOOKMARKED);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 40),
+                          child: Icon(
+                            Icons.favorite_border,
+                            size: 40,
+                            color: kPrimaryColor,
+                          ),
                         ),
                       ),
                       Padding(

@@ -4,7 +4,7 @@ import 'package:novel_flutter/routes/routes.dart';
 import 'package:novel_flutter/screens/Login/login_screen.dart';
 import 'package:novel_flutter/screens/Signup/signup_screen.dart';
 
-enum SampleItem { itemOne, itemTwo }
+enum SampleItem { itemOne, itemTwo, itemThree }
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -66,7 +66,9 @@ class NavBar extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(Routes.UPLOADED);
+            },
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(

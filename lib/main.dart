@@ -51,11 +51,6 @@ class MyApp extends StatefulWidget {
           ),
           routes: {
             "/": (context) => const HomePage(),
-            "/trending": (context) => const TrendingPage(),
-            //"/login": (context) => const LoginScreen(),
-            //"/signup": (context) => const SignUpScreen(),
-            //"/": (context) => const LoginScreen(),
-            //"/": (context) => const SignUpScreen(),
           });
 
   @override

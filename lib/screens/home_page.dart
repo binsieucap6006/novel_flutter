@@ -5,6 +5,7 @@ import 'package:novel_flutter/widget/trending_bar_widget.dart';
 
 import '../components/background.dart';
 import '../constants.dart';
+import '../routes/routes.dart';
 import '../widget/latest_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -43,7 +44,7 @@ class HomePage extends StatelessWidget {
                     textStyle: const TextStyle(fontSize: 25),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/trending');
+                    Navigator.of(context).pushNamed(Routes.TRENDING);
                   },
                   child: const Text(
                     'More',

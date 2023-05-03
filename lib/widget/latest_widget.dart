@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:novel_flutter/screens/details_page.dart';
 
 import '../constants.dart';
+import '../routes/routes.dart';
 
 class LatestNovelWidget extends StatelessWidget {
   const LatestNovelWidget({super.key});
@@ -64,6 +65,7 @@ class LatestNovelWidget extends StatelessWidget {
                           ),
                         ),
                         RatingBar.builder(
+                          ignoreGestures: true,
                           initialRating: 4,
                           minRating: 1,
                           direction: Axis.horizontal,
@@ -104,11 +106,23 @@ class LatestNovelWidget extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Icon(
-                          Icons.favorite_border,
-                          color: Colors.red,
-                          size: 26,
+                      // children: const [
+                      //   Icon(
+                      //     Icons.favorite_border,
+                      //     color: Colors.red,
+                      //     size: 26,
+                      //   )
+                      // ],
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(Routes.BOOKMARKED);
+                          },
+                          child: const Icon(
+                            Icons.favorite_border,
+                            color: Colors.red,
+                            size: 26,
+                          ),
                         )
                       ],
                     ),
