@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:novel_flutter/states/current_user.dart';
 import 'package:novel_flutter/widget/header_widget.dart';
 import 'package:novel_flutter/widget/navbar_widget.dart';
 import 'package:novel_flutter/widget/trending_bar_widget.dart';
@@ -9,8 +11,8 @@ import '../routes/routes.dart';
 import '../widget/latest_widget.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+  HomePage({super.key});
+  final User? user = CurrentUser().currentUser;
   @override
   Widget build(BuildContext context) {
     return Background(

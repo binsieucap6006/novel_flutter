@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:novel_flutter/screens/home_page.dart';
-
+import 'package:novel_flutter/states/Current_User.dart';
+import 'package:provider/provider.dart';
 import '../../../components/already_have_an_account_acheck.dart';
 import '../../../constants.dart';
+
 import '../../../routes/routes.dart';
+import '../../Login/login_screen.dart';
 import '../../Signup/signup_screen.dart';
 
 class LoginForm extends StatefulWidget {
@@ -18,20 +22,23 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  String? ErrorMsg;
+  bool isLogin = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   TextEditingController emailController = TextEditingController();
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    emailController.dispose();
-    super.dispose();
-  }
-
-  String text = "admin";
-
-  void _setText() {
-    setState(() {
-      text = emailController.text;
-    });
+  Future<void> logInUser() async {
+    try {
+      await CurrentUser().loginUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        ErrorMsg = e.message;
+      });
+    }
   }
 
   @override
@@ -40,7 +47,7 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           TextFormField(
-            controller: emailController,
+            controller: _emailController,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
@@ -49,13 +56,14 @@ class _LoginFormState extends State<LoginForm> {
               hintText: "Your email",
               prefixIcon: Padding(
                 padding: EdgeInsets.all(defaultPadding),
-                child: Icon(Icons.person),
+                child: Icon(Icons.alternate_email),
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
             child: TextFormField(
+              controller: _passwordController,
               textInputAction: TextInputAction.done,
               obscureText: true,
               cursorColor: kPrimaryColor,
@@ -73,21 +81,17 @@ class _LoginFormState extends State<LoginForm> {
             tag: "login_btn",
             child: ElevatedButton(
               onPressed: () {
-                if (Text(text) == "admin")
-                  Navigator.of(context).pushNamed(Routes.ADMIN);
-                else
+                if (_emailController == null || _passwordController == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Please fill in email and password"),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                } else {
+                  logInUser();
                   Navigator.of(context).pushNamed("/");
-                //Navigator.of(context).pushNamed(Routes.ADMIN);
-                // showDialog(
-                //   context: context,
-                //   builder: (context) {
-                //     return AlertDialog(
-                //       // Retrieve the text that the user has entered by using the
-                //       // TextEditingController.
-                //       content: Text(emailController.text),
-                //     );
-                //   },
-                // );
+                }
               },
               child: Text(
                 "Login".toUpperCase(),
@@ -97,14 +101,7 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(height: defaultPadding),
           AlreadyHaveAnAccountCheck(
             press: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const SignUpScreen();
-                  },
-                ),
-              );
+              Navigator.of(context).pushNamed(Routes.SIGN_UP);
             },
           ),
         ],

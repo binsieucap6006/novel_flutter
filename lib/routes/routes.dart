@@ -7,6 +7,7 @@ abstract class _Paths {
   static const String BOOKMARKED = '/bookmarked';
   static const String ADD_CHAPTER = '/add-chapter';
   static const String ADMIN = '/admin';
+  static const String WELCOME = '/welcome';
   //static const String DETAILS = '/details';
 }
 
@@ -20,4 +21,5 @@ abstract class Routes {
   static const String BOOKMARKED = _Paths.BOOKMARKED;
   static const String ADD_CHAPTER = _Paths.ADD_CHAPTER;
   static const String ADMIN = _Paths.ADMIN;
+  static const String WELCOME = _Paths.WELCOME;
 }

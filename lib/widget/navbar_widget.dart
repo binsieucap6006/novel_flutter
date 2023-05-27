@@ -3,11 +3,46 @@ import 'package:flutter/material.dart';
 import 'package:novel_flutter/routes/routes.dart';
 import 'package:novel_flutter/screens/Login/login_screen.dart';
 import 'package:novel_flutter/screens/Signup/signup_screen.dart';
+import 'package:novel_flutter/states/current_user.dart';
 
 enum SampleItem { itemOne, itemTwo, itemThree }
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("Cancel"),
+      onPressed: () {
+        Navigator.of(context).pop(); // dismiss dialog
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text("Sign out"),
+      onPressed: () {
+        Navigator.of(context).pop(); // dismiss dialog
+        Navigator.of(context).pushNamed(Routes.LOGIN);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("AlertDialog"),
+      content: Text("Are you sure?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,27 +68,34 @@ class NavBar extends StatelessWidget {
                 ],
               ),
               //child: const Icon(CupertinoIcons.bars),
-              child: PopupMenuButton<SampleItem>(
-                onSelected: (Enum selectedItem) {
-                  if (selectedItem == SampleItem.itemOne) {
-                    Navigator.of(context).pushNamed(Routes.LOGIN);
-                  } else if (selectedItem == SampleItem.itemTwo) {
-                    Navigator.of(context).pushNamed(Routes.SIGN_UP);
-                  }
-                },
+              child: IconButton(
                 icon: const Icon(CupertinoIcons.bars),
-                itemBuilder: (BuildContext context) =>
-                    <PopupMenuEntry<SampleItem>>[
-                  PopupMenuItem<SampleItem>(
-                    value: SampleItem.itemOne,
-                    child: const Text('Log in'),
-                  ),
-                  PopupMenuItem<SampleItem>(
-                    value: SampleItem.itemTwo,
-                    child: const Text('Sign up'),
-                  ),
-                ],
+                onPressed: () {
+                  CurrentUser().SignOutUser();
+                  Navigator.of(context).pushNamed(Routes.WELCOME);
+                },
               ),
+              // child: PopupMenuButton<SampleItem>(
+              //   onSelected: (Enum selectedItem) {
+              //     if (selectedItem == SampleItem.itemOne) {
+              //       Navigator.of(context).pushNamed(Routes.LOGIN);
+              //     } else if (selectedItem == SampleItem.itemTwo) {
+              //       Navigator.of(context).pushNamed(Routes.SIGN_UP);
+              //     }
+              //   },
+              //   icon: const Icon(CupertinoIcons.bars),
+              //   itemBuilder: (BuildContext context) =>
+              //       <PopupMenuEntry<SampleItem>>[
+              //     PopupMenuItem<SampleItem>(
+              //       value: SampleItem.itemOne,
+              //       child: const Text('Log in'),
+              //     ),
+              //     PopupMenuItem<SampleItem>(
+              //       value: SampleItem.itemTwo,
+              //       child: const Text('Sign up'),
+              //     ),
+              //   ],
+              // ),
             ),
           ),
           const Padding(
@@ -61,7 +103,7 @@ class NavBar extends StatelessWidget {
               vertical: 10,
             ),
             child: Text(
-              "Novel Reader",
+              "Novel Hovel",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),

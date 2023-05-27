@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:novel_flutter/responsive.dart';
 
 import '../../components/background.dart';
+import '../../constants.dart';
 import 'components/login_form.dart';
-import 'components/login_screen_top_image.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,24 +14,6 @@ class LoginScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Responsive(
           mobile: const MobileLoginScreen(),
-          desktop: Row(
-            children: [
-              const Expanded(
-                child: LoginScreenTopImage(),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    SizedBox(
-                      width: 450,
-                      child: LoginForm(),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );
@@ -48,7 +30,19 @@ class MobileLoginScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const LoginScreenTopImage(),
+        Column(
+          children: [
+            const Text(
+              'LOGIN',
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: kPrimaryColor),
+            ),
+            const SizedBox(height: defaultPadding * 2),
+            const SizedBox(height: defaultPadding * 2),
+          ],
+        ),
         Row(
           children: const [
             Spacer(),

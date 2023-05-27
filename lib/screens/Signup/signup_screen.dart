@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:novel_flutter/constants.dart';
 import 'package:novel_flutter/responsive.dart';
 import '../../components/background.dart';
-import 'components/sign_up_top_image.dart';
 import 'components/signup_form.dart';
-import 'components/socal_sign_up.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -15,36 +13,6 @@ class SignUpScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Responsive(
           mobile: const MobileSignupScreen(),
-          desktop: Row(
-            children: [
-              const Expanded(
-                child: SignUpScreenTopImage(),
-              ),
-              Padding(
-                padding: EdgeInsets.all(50),
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: kPrimaryColor),
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    SizedBox(
-                      width: 450,
-                      child: SignUpForm(),
-                    ),
-                    SizedBox(height: defaultPadding / 2),
-                    // SocalSignUp()
-                  ],
-                ),
-              )
-            ],
-          ),
         ),
       ),
     );
@@ -61,7 +29,19 @@ class MobileSignupScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const SignUpScreenTopImage(),
+        Column(
+          children: [
+            Text(
+              "Sign Up".toUpperCase(),
+              style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: kPrimaryColor),
+            ),
+            const SizedBox(height: defaultPadding),
+            const SizedBox(height: defaultPadding),
+          ],
+        ),
         Row(
           children: const [
             Spacer(),
