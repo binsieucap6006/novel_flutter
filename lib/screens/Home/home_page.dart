@@ -1,24 +1,35 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:novel_flutter/states/current_user.dart';
-import 'package:novel_flutter/widget/header_widget.dart';
-import 'package:novel_flutter/widget/navbar_widget.dart';
-import 'package:novel_flutter/widget/trending_bar_widget.dart';
 
-import '../components/background.dart';
-import '../constants.dart';
-import '../routes/routes.dart';
-import '../widget/latest_widget.dart';
+import '../../components/background.dart';
+import '../../constants.dart';
+import '../../routes/routes.dart';
+import 'components/bottom_navbar.dart';
+import 'components/header_widget.dart';
+import 'components/latest_widget.dart';
+import 'components/navbar_widget.dart';
+import 'components/trending_bar_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return HomePageState();
+  }
+}
+
+class HomePageState extends State<HomePage> {
   final User? user = CurrentUser().currentUser;
+  int myIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Background(
       child: ListView(
         children: [
           const NavBar(),
+
           const HeaderWidget(),
           //const SubMenuWidget(),
           Padding(
@@ -71,7 +82,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          const LatestNovelWidget(),
+          LatestNovelWidget(),
         ],
       ),
     );

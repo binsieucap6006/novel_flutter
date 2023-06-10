@@ -50,15 +50,15 @@ class TrendingItemWidget extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
+                      children: const [
+                        Text(
                           "Best Novel Ever",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 5),
+                        SizedBox(height: 5),
                         Text(
                           "Nice description, Nice description, Nice description, Nice description, Nice description, Nice description,",
                           style: TextStyle(
@@ -86,12 +86,16 @@ class TrendingItemWidget extends StatelessWidget {
                           textStyle: const TextStyle(fontSize: 16),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  DetailsPage("Best Novel Ever"),
-                            ),
-                          );
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (context) => DetailsPage(
+                          //         "Best Novel Ever",
+                          //         "Best Novel Ever",
+                          //         "Best Novel Ever",
+                          //         "Best Novel Ever",
+                          //         "Best Novel Ever"),
+                          //   ),
+                          // );
                         },
                         child: const Text(
                           'READ NOW',

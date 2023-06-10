@@ -23,6 +23,12 @@ dependencies:
   google_sign_in:
   image_picker: ^0.8.7+5
   file_picker:
+  searchfield: ^0.8.3
+  dropdown_search:
+  persistent_bottom_nav_bar:
+  bottom_navigation_bar:
+  firebase_admin:
+  flutter_riverpod:
 dev_dependencies:
   flutter_test:
     sdk: flutter

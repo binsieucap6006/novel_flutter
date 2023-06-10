@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/Home/components/navbar_widget.dart';
+
 class Background extends StatelessWidget {
   final Widget child;
   const Background({

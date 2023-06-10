@@ -3,16 +3,17 @@ import 'package:novel_flutter/constants.dart';
 import 'package:novel_flutter/responsive.dart';
 import 'package:novel_flutter/screens/Add_Novel/components/add_novel_form.dart';
 import '../../components/background.dart';
+import '../Home/components/navbar_widget.dart';
 
 class AddNovelScreen extends StatelessWidget {
   const AddNovelScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Background(
+    return const Background(
       child: SingleChildScrollView(
         child: Responsive(
-          mobile: const MobileAddNovelScreen(),
+          mobile: MobileAddNovelScreen(),
         ),
       ),
     );
@@ -27,7 +28,7 @@ class MobileAddNovelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      //mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Column(
           children: [

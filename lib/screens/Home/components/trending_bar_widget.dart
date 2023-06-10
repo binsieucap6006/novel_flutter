@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:novel_flutter/screens/details_page.dart';
 
-import '../constants.dart';
+import '../../../constants.dart';
 
 class TrendingNovelWidget extends StatelessWidget {
   const TrendingNovelWidget({super.key});
@@ -37,16 +37,20 @@ class TrendingNovelWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          height: 20,
+                        ),
                         Container(
                           alignment: Alignment.center,
                           child: Image.asset(
                             "assets/images/Capture1.PNG",
-                            height: 120,
-                            //fit: BoxFit.cover,
+                            height: 100,
+                            width: 140,
+                            fit: BoxFit.fitWidth,
                           ),
                         ),
-                        SizedBox(
-                          height: 5,
+                        const SizedBox(
+                          height: 10,
                         ),
                         const Text(
                           "Greatest Novel Ever",
@@ -54,40 +58,33 @@ class TrendingNovelWidget extends StatelessWidget {
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              " Chapter: 8",
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.bold),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: const TextStyle(
+                              fontSize: 16,
                             ),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                textStyle: const TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        DetailsPage("Greatest Novel Ever"),
-                                  ),
-                                );
-                              },
-                              child: const Text(
-                                'READ NOW',
-                                style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                          ),
+                          onPressed: () {
+                            // Navigator.of(context).push(
+                            //   MaterialPageRoute(
+                            //     builder: (context) => DetailsPage(
+                            //       "Greatest Novel Ever",
+                            //       "Greatest Novel Ever",
+                            //       "Greatest Novel Ever",
+                            //       "Greatest Novel Ever",
+                            //       "Greatest Novel Ever",
+                            //     ),
+                            //   ),
+                            // );
+                          },
+                          child: const Text(
+                            'READ NOW',
+                            style: TextStyle(
+                              color: kPrimaryColor,
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
-                        )
+                          ),
+                        ),
                       ],
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:novel_flutter/models/novelModel.dart';
 import 'package:novel_flutter/screens/Chapter/chapter_screen.dart';
 
 import '../components/background.dart';
@@ -6,20 +7,26 @@ import '../constants.dart';
 import '../routes/routes.dart';
 
 class DetailsPage extends StatelessWidget {
-  String img;
-  DetailsPage(this.img, {super.key});
+  // String name;
+  // String genre;
+  // String user;
+  // String img;
+  // String description;
+  DetailsPage(this.novel, {super.key});
+
+  novelModel novel;
   @override
   Widget build(BuildContext context) {
     return Background(
       child: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            padding: EdgeInsets.only(top: 10, bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 25),
+                  padding: EdgeInsets.only(left: 25),
                   child: InkWell(
                     onTap: () {
                       Navigator.pop(context);
@@ -32,29 +39,29 @@ class DetailsPage extends StatelessWidget {
                 ),
                 //SizedBox(height: 10),
                 Center(
-                  child: Image.asset(
-                    "assets/images/Capture1.PNG",
+                  child: Image.network(
+                    novel.Image!,
                     width: MediaQuery.of(context).size.width / 1.2,
                   ),
                 ),
 
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
                 Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 40),
+                  padding: EdgeInsets.only(left: 25, right: 40),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       Text(
-                        img,
-                        style: const TextStyle(
+                        novel.Name!,
+                        style: TextStyle(
                             fontSize: 30,
                             letterSpacing: 1,
                             fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(height: 25),
+                      SizedBox(height: 25),
                       Row(
-                        children: const [
+                        children: [
                           Text(
                             "Categories: ",
                             style: TextStyle(
@@ -64,22 +71,22 @@ class DetailsPage extends StatelessWidget {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            "Action, Sci-fi",
+                            novel.Genre!,
                             style: TextStyle(fontSize: 16, color: Colors.blue),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
-                      const Text(
+                      SizedBox(height: 20),
+                      Text(
                         "Description: ",
                         style: TextStyle(
                             fontSize: 18,
                             letterSpacing: 1,
                             fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(height: 15),
-                      const Text(
-                        "Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes",
+                      SizedBox(height: 15),
+                      Text(
+                        novel.Description!,
                         style: TextStyle(
                           fontSize: 14,
                         ),
@@ -87,14 +94,15 @@ class DetailsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: 30),
                 Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 40),
+                  padding: EdgeInsets.only(left: 25, right: 40),
                   child: Row(
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed(Routes.BOOKMARKED);
+                          //Navigator.of(context).pushNamed(Routes.BOOKMARKED);
+                          print(novel.Id);
                         },
                         child: Padding(
                           padding: EdgeInsets.only(left: 40),
@@ -116,8 +124,8 @@ class DetailsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30),
-                const Padding(
+                SizedBox(height: 30),
+                Padding(
                   padding: EdgeInsets.only(left: 25, right: 40),
                   child: Text(
                     "Chapters",

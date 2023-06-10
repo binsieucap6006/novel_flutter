@@ -1,9 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:novel_flutter/models/userModel.dart';
 
 class CurrentUser extends ChangeNotifier {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   User? get currentUser => _auth.currentUser;
+  // UserModel? userModel(User user) {
+  //   return user != null ? UserModel(email: user.email, uid: user.uid) : null;
+  // }
+
   Stream<User?> get authStateChange => _auth.authStateChanges();
   bool isLogin = false;
   Future<void> signUpUser(
@@ -18,7 +23,7 @@ class CurrentUser extends ChangeNotifier {
     //return isLogin = true;
   }
 
-  Future<void> SignOutUser() async {
+  Future<void> signOutUser() async {
     await _auth.signOut();
     //return isLogin = false;
   }

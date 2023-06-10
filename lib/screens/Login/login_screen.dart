@@ -10,10 +10,10 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Background(
+    return const Background(
       child: SingleChildScrollView(
         child: Responsive(
-          mobile: const MobileLoginScreen(),
+          mobile: MobileLoginScreen(),
         ),
       ),
     );
@@ -31,16 +31,16 @@ class MobileLoginScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Column(
-          children: [
-            const Text(
+          children: const [
+            Text(
               'LOGIN',
               style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: kPrimaryColor),
             ),
-            const SizedBox(height: defaultPadding * 2),
-            const SizedBox(height: defaultPadding * 2),
+            SizedBox(height: defaultPadding * 2),
+            SizedBox(height: defaultPadding * 2),
           ],
         ),
         Row(

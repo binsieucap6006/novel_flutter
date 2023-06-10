@@ -10,11 +10,11 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Background(
+    return const Background(
       child: SingleChildScrollView(
         child: SafeArea(
           child: Responsive(
-            mobile: const MobileWelcomeScreen(),
+            mobile: MobileWelcomeScreen(),
           ),
         ),
       ),

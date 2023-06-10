@@ -2,8 +2,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:novel_flutter/screens/Home/components/header_search.dart';
 
-import '../constants.dart';
+import '../../../constants.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
@@ -48,11 +49,18 @@ class HeaderWidget extends StatelessWidget {
                     horizontal: 15,
                   ),
                   child: TextFormField(
+                    readOnly: true,
                     decoration: const InputDecoration(
                       hintText: "What would you like to read?",
                       border: InputBorder.none,
                       fillColor: kPrimaryLightColor,
                     ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (_) => HeaderSearchScreen()));
+                    },
                   ),
                 ),
               ),

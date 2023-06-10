@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:novel_flutter/constants.dart';
-import 'package:novel_flutter/responsive.dart';
 import '../../components/background.dart';
-import '../../widget/header_widget.dart';
-import '../../widget/navbar_widget.dart';
-import '../details_page.dart';
+
+import '../Home/components/navbar_widget.dart';
 import 'components/add_chapter_input.dart';
 
 class AddChapterScreen extends StatelessWidget {
@@ -16,27 +14,27 @@ class AddChapterScreen extends StatelessWidget {
       child: ListView(
         children: [
           const NavBar(),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           //UploadNovelList(),
           Padding(
-            padding: EdgeInsets.all(1),
+            padding: const EdgeInsets.all(1),
             child: Column(
-              children: [
-                const Text(
+              children: const [
+                Text(
                   'Input text',
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: kPrimaryColor),
                 ),
-                const SizedBox(height: defaultPadding * 2),
-                const SizedBox(height: defaultPadding * 2),
+                SizedBox(height: defaultPadding * 2),
+                SizedBox(height: defaultPadding * 2),
               ],
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 20),
             child: ChapterInput(),
           )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:novel_flutter/screens/home_page.dart';
+
+import '../../Home/home_page.dart';
 
 const List<String> list = <String>[
   'List chapter',
@@ -16,7 +17,6 @@ class ChapterBar extends StatefulWidget with PreferredSizeWidget {
   State<ChapterBar> createState() => _ChapterBarState();
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => throw UnimplementedError();
 }
 
@@ -54,8 +54,6 @@ class _ChapterBarState extends State<ChapterBar> {
     );
   }
 
-  @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 

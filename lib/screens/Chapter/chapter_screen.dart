@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 import 'package:novel_flutter/screens/Chapter/components/chapter_bar.dart';
@@ -12,6 +14,7 @@ class ChapterScreen extends StatelessWidget {
   int chapter_number;
   // @override
   // State<ChapterScreen> createState() => _ChapterScreenState();
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -20,7 +23,7 @@ class ChapterScreen extends StatelessWidget {
           floatHeaderSlivers: true,
           headerSliverBuilder: (BuildContext context, bool isScrolled) {
             return [
-              ChapterBar(),
+              const ChapterBar(),
             ];
           },
           body: SingleChildScrollView(
@@ -28,22 +31,22 @@ class ChapterScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
                 children: [
-                  Text('Chapter: ${chapter_number}',
-                      style: TextStyle(fontSize: 22)),
-                  SizedBox(height: 5),
+                  Text('Chapter: $chapter_number',
+                      style: const TextStyle(fontSize: 22)),
+                  const SizedBox(height: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Text('Độ dài: 2910 từ', style: TextStyle(fontSize: 18)),
                       SizedBox(width: 5),
                       Text('Lần cuối cập nhật: 2020',
                           style: TextStyle(fontSize: 18)),
                     ],
                   ),
-                  SizedBox(height: 20),
-                  Text(exampleNovel, style: TextStyle(fontSize: 18)),
-                  SizedBox(height: 5),
-                  Text(exampleNovel, style: TextStyle(fontSize: 18)),
+                  const SizedBox(height: 20),
+                  const Text(exampleNovel, style: TextStyle(fontSize: 18)),
+                  const SizedBox(height: 5),
+                  const Text(exampleNovel, style: TextStyle(fontSize: 18)),
                 ],
               ),
             ),

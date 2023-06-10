@@ -5,13 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:novel_flutter/states/Current_User.dart';
-import 'package:provider/provider.dart';
-import '../../../components/already_have_an_account_acheck.dart';
 import '../../../constants.dart';
-
-import '../../../routes/routes.dart';
-import '../../Login/login_screen.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 class AddNovelForm extends StatefulWidget {
   const AddNovelForm({
@@ -26,23 +21,24 @@ class AddNovelForm extends StatefulWidget {
 
 class _AddNovelFormState extends State<AddNovelForm> {
   String? errorMsg;
-  bool isLogin = false;
+  //bool isLogin = false;
   final TextEditingController _novelNameController = TextEditingController();
   final TextEditingController _novelDescriptionController =
       TextEditingController();
 
   GlobalKey<FormState> key = GlobalKey();
 
-  CollectionReference _reference =
+  final CollectionReference _reference =
       FirebaseFirestore.instance.collection('Requests');
-
+  String? selectedGenre = 'Action';
   String imageUrl = '';
+  String rqID = '';
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  String? inputData() {
+  String getUID() {
     final User? user = auth.currentUser;
     final uid = user?.uid;
-    return uid;
+    return uid!;
     // here you write the codes to input the data into firestore
   }
 
@@ -76,7 +72,6 @@ class _AddNovelFormState extends State<AddNovelForm> {
             child: TextFormField(
               controller: _novelDescriptionController,
               textInputAction: TextInputAction.done,
-              obscureText: true,
               cursorColor: kPrimaryColor,
               decoration: const InputDecoration(
                 hintText: "Description",
@@ -94,28 +89,46 @@ class _AddNovelFormState extends State<AddNovelForm> {
               },
             ),
           ),
+
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
-            child: TextFormField(
-              //controller: _passwordController,
-              textInputAction: TextInputAction.done,
-              obscureText: true,
-              cursorColor: kPrimaryColor,
-              decoration: const InputDecoration(
-                hintText: "Genre(s)",
-                prefixIcon: Padding(
-                  padding: EdgeInsets.all(defaultPadding),
-                  child: Icon(Icons.lock),
-                ),
+            child: DropdownSearch<String>(
+              popupProps: const PopupProps.menu(
+                showSelectedItems: true,
+                //disabledItemFn: (String s) => s.startsWith('I'),
               ),
+              items: const [
+                "Action",
+                "Fantasy",
+                "Sci-Fi",
+                'Romance',
+                'Slice of Life'
+              ],
+              dropdownDecoratorProps: const DropDownDecoratorProps(),
+              onChanged: (value) {
+                setState(() {
+                  selectedGenre = value;
+                });
+              },
+              selectedItem: selectedGenre,
             ),
           ),
+
+          // DropdownSearch<String>.multiSelection(
+          //   items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+          //   popupProps: PopupPropsMultiSelection.menu(
+          //     showSelectedItems: true,
+          //     disabledItemFn: (String s) => s.startsWith('I'),
+          //   ),
+          //   onChanged: print,
+          //   selectedItems: ["Brazil"],
+          // ),
           IconButton(
               onPressed: () async {
                 ImagePicker imagePicker = ImagePicker();
                 XFile? file =
                     await imagePicker.pickImage(source: ImageSource.gallery);
-                print('${file?.path}');
+                //print('${file?.path}');
 
                 if (file == null) return;
                 //Import dart:core
@@ -140,48 +153,63 @@ class _AddNovelFormState extends State<AddNovelForm> {
                   await referenceImageToUpload.putFile(File(file.path));
                   //Success: get the download URL
                   imageUrl = await referenceImageToUpload.getDownloadURL();
-                } catch (error) {}
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Upload success!')));
+                } catch (error) {
+                  print(error);
+                }
               },
-              icon: Icon(Icons.camera_alt)),
+              icon: const Icon(Icons.camera_alt)),
           ElevatedButton(
             onPressed: () async {
               if (imageUrl.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Please upload an image')));
+                    const SnackBar(content: Text('Please upload an image')));
                 return;
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Submit success!')));
+                Navigator.of(context).pushNamed("/");
               }
-
               //if (key.currentState!.validate()) {
+              String uniqueFileName =
+                  DateTime.now().millisecondsSinceEpoch.toString();
               String novelName = _novelNameController.text;
               String novelDescription = _novelDescriptionController.text;
-
               //Create a Map of data
-              Map<String, String> dataToSend = {
+              Map<String, dynamic> dataToSend = {
                 'rqname': novelName,
                 'rqdescription': novelDescription,
                 'rqimg': imageUrl,
                 'rqaction': "0",
-                'rquser': "1",
+                'rquser': getUID(),
+                'rqgenre': selectedGenre!,
+                'time': int.parse(uniqueFileName),
+                'chapterNum': 0
+                //'rqid': '',
               };
 
               //Add a new item
-              _reference.add(dataToSend);
+              try {
+                _reference.add(dataToSend).then(
+                  (DocumentReference doc) async {
+                    rqID = doc.id;
+                    print(doc.id);
+                    await FirebaseFirestore.instance
+                        .collection("Requests")
+                        .doc(rqID)
+                        .update({'rqid': rqID});
+                  },
+                );
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Novel created.')));
+              } catch (e) {}
+
               //}
             },
-            child: Text('Submit'),
+            child: const Text('Submit'),
           ),
           const SizedBox(height: defaultPadding / 2),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text("Sign Up".toUpperCase()),
-          ),
-          const SizedBox(height: defaultPadding),
-          AlreadyHaveAnAccountCheck(
-            login: false,
-            press: () {
-              Navigator.of(context).pushNamed(Routes.LOGIN);
-            },
-          ),
         ],
       ),
     );

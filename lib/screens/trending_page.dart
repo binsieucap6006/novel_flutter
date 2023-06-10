@@ -3,7 +3,7 @@ import 'package:novel_flutter/widget/trending_item_widget.dart';
 
 import '../components/background.dart';
 import '../constants.dart';
-import '../widget/header_widget.dart';
+import 'Home/components/header_widget.dart';
 
 class TrendingPage extends StatelessWidget {
   const TrendingPage({super.key});

@@ -3,28 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:novel_flutter/constants.dart';
 import 'package:novel_flutter/routes/app_pages.dart';
 import 'package:novel_flutter/screens/widget_tree.dart';
-import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'package:novel_flutter/screens/Login/login_screen.dart';
-import 'package:novel_flutter/screens/Signup/signup_screen.dart';
-import 'package:novel_flutter/screens/details_page.dart';
-import 'package:novel_flutter/screens/home_page.dart';
-import 'package:novel_flutter/screens/trending_page.dart';
-
-import 'states/current_user.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'screens/Home/home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  final FirebaseApp app = await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: 'AIzaSyA5NgoI83fRIy5aLgibCaP2tDBLXzBZCec',
+      appId: "Novel Hovel",
+      messagingSenderId: '445637014017',
+      projectId: 'novelhovel-8a04e',
+    ),
+  );
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-  runApp(const MyApp());
+  //runApp(const MyApp());
+  runApp(ProviderScope(child: MyApp(app: app)));
 }
 
 class MyApp extends StatefulWidget {
+  FirebaseApp app;
+  MyApp({super.key, required this.app});
   static const String title = 'Novel';
-  const MyApp({super.key});
+  //const MyApp({super.key});
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -71,7 +74,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: "Novel Hovel",
       onGenerateRoute: _appRouter.onGenerateRoute,
-      home: WidgetTree(),
+      home: const WidgetTree(),
     );
   }
 }
