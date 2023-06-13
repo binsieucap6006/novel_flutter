@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:novel_flutter/constants.dart';
 import 'package:novel_flutter/routes/routes.dart';
 import '../../../components/background.dart';
@@ -15,20 +12,22 @@ class AdminScreen extends StatelessWidget {
     return Background(
       child: Column(
         children: [
-          const NavBar(),
+          const NavBar(
+            title: 'Admin Homepage',
+          ),
           const SizedBox(
             height: 30,
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text(
-              'Admin page',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: kPrimaryColor),
-            ),
-          ),
+          // const Padding(
+          //   padding: EdgeInsets.only(left: 20),
+          //   child: Text(
+          //     'Admin page',
+          //     style: TextStyle(
+          //         fontSize: 30,
+          //         fontWeight: FontWeight.bold,
+          //         color: kPrimaryColor),
+          //   ),
+          // ),
           const SizedBox(
             height: 30,
           ),
@@ -42,7 +41,7 @@ class AdminScreen extends StatelessWidget {
                 mainAxisSpacing: 20,
                 children: <Widget>[
                   GestureDetector(
-                    child: CategoryCard(
+                    child: const CategoryCard(
                       title: 'User Management',
                       imgSrc: 'assets/icons/user.png',
                     ),
@@ -51,7 +50,7 @@ class AdminScreen extends StatelessWidget {
                     },
                   ),
                   GestureDetector(
-                    child: CategoryCard(
+                    child: const CategoryCard(
                       title: 'Novel Management',
                       imgSrc: 'assets/icons/user.png',
                     ),
@@ -60,7 +59,7 @@ class AdminScreen extends StatelessWidget {
                     },
                   ),
                   GestureDetector(
-                    child: CategoryCard(
+                    child: const CategoryCard(
                       title: 'Request Management',
                       imgSrc: 'assets/icons/user.png',
                     ),
@@ -69,7 +68,7 @@ class AdminScreen extends StatelessWidget {
                     },
                   ),
                   GestureDetector(
-                    child: CategoryCard(
+                    child: const CategoryCard(
                       title: 'In progess',
                       imgSrc: 'assets/icons/user.png',
                     ),
@@ -106,7 +105,7 @@ class CategoryCard extends StatelessWidget {
       //splashColor: kPrimaryPurpleSplashColor,
       //highlightColor: kPrimaryPurpleColor,
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(children: [
           const Spacer(),
           Container(

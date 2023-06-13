@@ -1,37 +1,50 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:novel_flutter/models/novelModel.dart';
-import 'package:novel_flutter/screens/Chapter/chapter_screen.dart';
+import 'package:novel_flutter/models/chapterModel.dart';
+import 'package:novel_flutter/models/novel_model.dart';
 
-import '../components/background.dart';
-import '../constants.dart';
-import '../routes/routes.dart';
+import '../../components/background.dart';
+import '../../constants.dart';
+import 'components/chapter_list.dart';
 
-class DetailsPage extends StatelessWidget {
+class DetailsPage extends StatefulWidget {
   // String name;
   // String genre;
   // String user;
   // String img;
   // String description;
-  DetailsPage(this.novel, {super.key});
+  const DetailsPage(this.novel, {super.key});
+  final NovelModel novel;
 
-  novelModel novel;
+  @override
+  State<DetailsPage> createState() => _DetailsPageState();
+}
+
+class _DetailsPageState extends State<DetailsPage> {
+  List<Object> chapterList = [];
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    getChapterList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Background(
       child: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(top: 10, bottom: 10),
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 25),
+                  padding: const EdgeInsets.only(left: 25),
                   child: InkWell(
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_back_ios_new,
                       color: kPrimaryColor,
                     ),
@@ -40,71 +53,72 @@ class DetailsPage extends StatelessWidget {
                 //SizedBox(height: 10),
                 Center(
                   child: Image.network(
-                    novel.Image!,
+                    widget.novel.image!,
                     width: MediaQuery.of(context).size.width / 1.2,
                   ),
                 ),
 
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Padding(
-                  padding: EdgeInsets.only(left: 25, right: 40),
+                  padding: const EdgeInsets.only(left: 25, right: 40),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
-                        novel.Name!,
-                        style: TextStyle(
+                        widget.novel.name!,
+                        style: const TextStyle(
                             fontSize: 30,
                             letterSpacing: 1,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Categories: ",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
-                            novel.Genre!,
-                            style: TextStyle(fontSize: 16, color: Colors.blue),
+                            widget.novel.genre!,
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.blue),
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
-                      Text(
+                      const SizedBox(height: 20),
+                      const Text(
                         "Description: ",
                         style: TextStyle(
                             fontSize: 18,
                             letterSpacing: 1,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Text(
-                        novel.Description!,
-                        style: TextStyle(
+                        widget.novel.description!,
+                        style: const TextStyle(
                           fontSize: 14,
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Padding(
-                  padding: EdgeInsets.only(left: 25, right: 40),
+                  padding: const EdgeInsets.only(left: 25, right: 40),
                   child: Row(
                     children: [
                       InkWell(
                         onTap: () {
                           //Navigator.of(context).pushNamed(Routes.BOOKMARKED);
-                          print(novel.Id);
+                          print(widget.novel.id);
                         },
-                        child: Padding(
+                        child: const Padding(
                           padding: EdgeInsets.only(left: 40),
                           child: Icon(
                             Icons.favorite_border,
@@ -113,7 +127,7 @@ class DetailsPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(left: 240),
                         child: Icon(
                           Icons.thumb_up,
@@ -124,8 +138,8 @@ class DetailsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 30),
-                Padding(
+                const SizedBox(height: 30),
+                const Padding(
                   padding: EdgeInsets.only(left: 25, right: 40),
                   child: Text(
                     "Chapters",
@@ -136,40 +150,18 @@ class DetailsPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                for (int i = 0; i < 10; i++)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 25, right: 40),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Chapter ${i + 1}",
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                        const SizedBox(width: 210),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            textStyle: const TextStyle(fontSize: 16),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => ChapterScreen(i + 1),
-                              ),
-                            );
-                          },
-                          child: const Text(
-                            'READ NOW',
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 40),
-                      ],
-                    ),
-                  ),
+                ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: chapterList.length,
+                  itemBuilder: (context, index) {
+                    return ChapterList(
+                        chapterList[index] as ChapterModel, widget.novel.id!);
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 // Row(
                 //   children: [
                 //     Text(
@@ -190,5 +182,18 @@ class DetailsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future getChapterList() async {
+    //final uid = AuthService()
+    var data = await FirebaseFirestore.instance
+        .collection('Requests')
+        .doc(widget.novel.id)
+        .collection('Chapters')
+        .get();
+    setState(() {
+      chapterList =
+          List.from(data.docs.map((doc) => ChapterModel.fromSnapshot(doc)));
+    });
   }
 }

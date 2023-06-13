@@ -2,41 +2,85 @@ import 'package:flutter/material.dart';
 import 'package:novel_flutter/constants.dart';
 import '../../components/background.dart';
 
-import '../Home/components/navbar_widget.dart';
 import 'components/add_chapter_input.dart';
 
-class AddChapterScreen extends StatelessWidget {
-  const AddChapterScreen({Key? key}) : super(key: key);
+class AddChapterScreen extends StatefulWidget {
+  const AddChapterScreen(
+      {super.key, required this.novelId, required this.novelName});
+  final String novelId;
+  final String novelName;
+  @override
+  State<AddChapterScreen> createState() => _AddChapterScreenState();
+}
+
+class _AddChapterScreenState extends State<AddChapterScreen> {
+  int chapterNum = 0;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setState(() {
+      chapterNum;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Background(
-      child: ListView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const NavBar(),
+          // NavBar(
+          //   title: '',
+          // ),
+          Padding(
+            padding: const EdgeInsets.only(left: 25),
+            child: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(
+                Icons.arrow_back_ios_new,
+                color: kPrimaryColor,
+              ),
+            ),
+          ),
           const SizedBox(
             height: 50,
           ),
           //UploadNovelList(),
           Padding(
-            padding: const EdgeInsets.all(1),
+            padding: const EdgeInsets.only(left: 150),
             child: Column(
-              children: const [
-                Text(
-                  'Input text',
+              children: [
+                const SizedBox(height: defaultPadding * 3),
+                const Text(
+                  'Add Chapter',
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: kPrimaryColor),
                 ),
-                SizedBox(height: defaultPadding * 2),
-                SizedBox(height: defaultPadding * 2),
+                const SizedBox(height: defaultPadding * 2),
+                Text(
+                  'for ${widget.novelName}',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: kPrimaryColor,
+                  ),
+                ),
+                const SizedBox(height: defaultPadding * 2),
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: ChapterInput(),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30),
+            child: ChapterInput(
+              novelId: widget.novelId,
+            ),
           )
         ],
       ),

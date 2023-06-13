@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_admin/testing.dart';
+//import 'package:firebase_admin/testing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:novel_flutter/components/background.dart';
-import 'package:novel_flutter/screens/Home/components/navbar_widget.dart';
 import 'package:novel_flutter/screens/Home/components/search_card.dart';
 
 import '../../../constants.dart';
-import '../../../models/novelModel.dart';
-import '../../details_page.dart';
+import '../../../models/novel_model.dart';
+//import '../../details_page.dart';
 
 class HeaderSearchScreen extends StatefulWidget {
   const HeaderSearchScreen({super.key});
@@ -19,7 +18,7 @@ class HeaderSearchScreen extends StatefulWidget {
 
 class _HeaderSearchScreenState extends State<HeaderSearchScreen> {
   String inputTxt = '';
-  late final novelModel novel;
+  late final NovelModel novel;
   List<Object> novelList = [];
   @override
   void didChangeDependencies() {
@@ -32,7 +31,9 @@ class _HeaderSearchScreenState extends State<HeaderSearchScreen> {
     return Background(
       child: Column(
         children: [
-          NavBar(),
+          // const NavBar(
+          //   title: 'Search page',
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 10,
@@ -99,7 +100,7 @@ class _HeaderSearchScreenState extends State<HeaderSearchScreen> {
               shrinkWrap: true,
               itemCount: novelList.length,
               itemBuilder: (context, index) {
-                return SearchCard(novelList[index] as novelModel);
+                return SearchCard(novelList[index] as NovelModel);
               },
             )),
           ),
@@ -261,7 +262,7 @@ class _HeaderSearchScreenState extends State<HeaderSearchScreen> {
         .get();
     setState(() {
       novelList =
-          List.from(data.docs.map((doc) => novelModel.fromSnapshot(doc)));
+          List.from(data.docs.map((doc) => NovelModel.fromSnapshot(doc)));
     });
   }
 }

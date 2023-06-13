@@ -1,12 +1,16 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 
 import '../screens/Home/components/navbar_widget.dart';
 
 class Background extends StatelessWidget {
   final Widget child;
+  //final String title;
   const Background({
     Key? key,
     required this.child,
+    //required this.title,
     this.topImage = "assets/images/main_top.png",
     this.bottomImage = "assets/images/login_bottom.png",
   }) : super(key: key);

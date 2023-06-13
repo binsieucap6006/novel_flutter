@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:novel_flutter/screens/details_page.dart';
-
-import '../constants.dart';
+import '../../../constants.dart';
 
 class TrendingItemWidget extends StatelessWidget {
   const TrendingItemWidget({super.key});
@@ -44,13 +42,13 @@ class TrendingItemWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                const Padding(
+                  padding: EdgeInsets.only(top: 10),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
                           "Best Novel Ever",
                           style: TextStyle(

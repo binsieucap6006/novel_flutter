@@ -1,19 +1,24 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:novel_flutter/constants.dart';
 
 import 'package:novel_flutter/screens/Chapter/components/chapter_bar.dart';
 
 import '../../components/background.dart';
 
-const String exampleNovel =
-    'Một anh chàng có vai trò là một người quản lí trong một nhóm mạo hiểm giả, ■■■■■, đã bị phản bội bởi chính những thành viên trong nhóm của anh ta ở ngọn núi Kuguse, nơi có một con rồng đang cư ngụ. Dính một vết thương chí mạng rồi ngất đi, anh ta tỉnh lại trong tổ của Hỏa Long Kafal, nó đã mất đi quả trứng của mình trong một tai nạn. Vì một lí do nào đó, anh trở thành một cô bé và được ban cho cái tên Lucella, tên của cô con gái đã chết của con rồng sau khi anh đã mất đi toàn bộ kí ức của mình cùng với cái tên cũ. Có vẻ như Kafal sẽ nuôi nấng anh chàng như con gái của mình…? Đây là một câu chuyện kể về vận mệnh đã đưa một con rồng cùng với một con người đến với nhau như thế nào.';
+class ChapterScreen extends StatefulWidget {
+  ChapterScreen(this.chapterNumber, this.novelId, {super.key});
+  int chapterNumber;
+  String novelId;
+  @override
+  State<ChapterScreen> createState() => _ChapterScreenState();
+}
 
-class ChapterScreen extends StatelessWidget {
-  ChapterScreen(this.chapter_number, {Key? key}) : super(key: key);
-  int chapter_number;
+class _ChapterScreenState extends State<ChapterScreen> {
   // @override
-  // State<ChapterScreen> createState() => _ChapterScreenState();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,34 +28,69 @@ class ChapterScreen extends StatelessWidget {
           floatHeaderSlivers: true,
           headerSliverBuilder: (BuildContext context, bool isScrolled) {
             return [
-              const ChapterBar(),
+              ChapterBar(
+                chapterNumber: widget.chapterNumber,
+                novelId: widget.novelId,
+              ),
             ];
           },
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: Column(
-                children: [
-                  Text('Chapter: $chapter_number',
-                      style: const TextStyle(fontSize: 22)),
-                  const SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('Độ dài: 2910 từ', style: TextStyle(fontSize: 18)),
-                      SizedBox(width: 5),
-                      Text('Lần cuối cập nhật: 2020',
-                          style: TextStyle(fontSize: 18)),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(exampleNovel, style: TextStyle(fontSize: 18)),
-                  const SizedBox(height: 5),
-                  const Text(exampleNovel, style: TextStyle(fontSize: 18)),
-                ],
-              ),
-            ),
-          ),
+          body: FutureBuilder(
+              future: FirebaseFirestore.instance
+                  .collection("Requests")
+                  .doc(widget.novelId)
+                  .collection('Chapters')
+                  .doc(widget.chapterNumber.toString())
+                  .get(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text('Chapter: ${widget.chapterNumber}',
+                              style: const TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 5),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: const [
+                          //     Text('Độ dài: 2910 từ', style: TextStyle(fontSize: 18)),
+                          //     SizedBox(width: 5),
+                          //     Text('Lần cuối cập nhật: 2020',
+                          //         style: TextStyle(fontSize: 18)),
+                          //   ],
+                          // ),
+                          const SizedBox(height: 20),
+
+                          Text(
+                            snapshot.data!['body']
+                                .toString()
+                                .replaceAll('.', '.\n'),
+                            textAlign: TextAlign.justify,
+                          ),
+                          const SizedBox(height: 5),
+                          //Text(exampleNovel, style: TextStyle(fontSize: 18)),
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  return Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(
+                          backgroundColor: kPrimaryColor,
+                          color: Colors.white,
+                        )),
+                  );
+                }
+              }),
         ),
       ),
     );

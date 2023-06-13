@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import '../../../models/novelModel.dart';
-import '../../details_page.dart';
+import '../../../models/novel_model.dart';
+import '../../Details/details_page.dart';
 
+// ignore: must_be_immutable
 class SearchCard extends StatelessWidget {
   SearchCard(this.novel, {super.key});
-  novelModel novel;
+  NovelModel novel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,16 +17,16 @@ class SearchCard extends StatelessWidget {
           elevation: 10,
           child: ListTile(
             title: Text(
-              '${novel.Name}',
-              style: TextStyle(
+              '${novel.name}',
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: kPrimaryColor,
               ),
             ),
-            contentPadding: EdgeInsets.all(10),
+            contentPadding: const EdgeInsets.all(10),
             leading: Image.network(
-              '${novel.Image}',
+              '${novel.image}',
               height: 100,
               width: 100,
               fit: BoxFit.fitWidth,

@@ -59,7 +59,7 @@ class HeaderWidget extends StatelessWidget {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (_) => HeaderSearchScreen()));
+                              builder: (_) => const HeaderSearchScreen()));
                     },
                   ),
                 ),

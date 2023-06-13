@@ -1,60 +1,97 @@
 import 'package:flutter/material.dart';
 import 'package:novel_flutter/constants.dart';
-import 'package:novel_flutter/responsive.dart';
 import 'package:novel_flutter/screens/Add_Novel/components/add_novel_form.dart';
 import '../../components/background.dart';
-import '../Home/components/navbar_widget.dart';
 
 class AddNovelScreen extends StatelessWidget {
-  const AddNovelScreen({Key? key}) : super(key: key);
-
+  const AddNovelScreen({
+    super.key,
+  });
+  //String novelId;
   @override
   Widget build(BuildContext context) {
-    return const Background(
-      child: SingleChildScrollView(
-        child: Responsive(
-          mobile: MobileAddNovelScreen(),
-        ),
+    return Background(
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(
+                    Icons.arrow_back_ios_new,
+                    color: kPrimaryColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+          Text(
+            "Create your Novel".toUpperCase(),
+            style: const TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: kPrimaryColor),
+          ),
+          const SizedBox(height: defaultPadding),
+          const SizedBox(height: defaultPadding),
+          const SizedBox(
+            height: 50,
+          ),
+          const Row(
+            children: [
+              Spacer(),
+              Expanded(
+                flex: 8,
+                child: AddNovelForm(),
+              ),
+              Spacer(),
+            ],
+          ),
+        ],
+
+        // const SocalSignUp()
       ),
     );
   }
 }
 
-class MobileAddNovelScreen extends StatelessWidget {
-  const MobileAddNovelScreen({
-    Key? key,
-  }) : super(key: key);
+// class MobileAddNovelScreen extends StatelessWidget {
+//   const MobileAddNovelScreen({
+//     Key? key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      //mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Column(
-          children: [
-            Text(
-              "Create your Novel".toUpperCase(),
-              style: const TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: kPrimaryColor),
-            ),
-            const SizedBox(height: defaultPadding),
-            const SizedBox(height: defaultPadding),
-          ],
-        ),
-        Row(
-          children: const [
-            Spacer(),
-            Expanded(
-              flex: 8,
-              child: AddNovelForm(),
-            ),
-            Spacer(),
-          ],
-        ),
-        // const SocalSignUp()
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         Text(
+//           "Create your Novel".toUpperCase(),
+//           style: const TextStyle(
+//               fontSize: 30, fontWeight: FontWeight.bold, color: kPrimaryColor),
+//         ),
+//         const SizedBox(height: defaultPadding),
+//         const SizedBox(height: defaultPadding),
+//         const Row(
+//           children: [
+//             Spacer(),
+//             Expanded(
+//               flex: 8,
+//               child: AddNovelForm(),
+//             ),
+//             Spacer(),
+//           ],
+//         ),
+//       ],
+
+//       // const SocalSignUp()
+//     );
+//   }
+// }

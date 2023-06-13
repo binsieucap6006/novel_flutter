@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+//import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:novel_flutter/screens/Home/components/novel_card.dart';
-import 'package:novel_flutter/screens/details_page.dart';
-import 'package:novel_flutter/models/novelModel.dart';
+//import 'package:novel_flutter/screens/details_page.dart';
+import 'package:novel_flutter/models/novel_model.dart';
 
-import '../../../constants.dart';
-import '../../../routes/routes.dart';
+//import '../../../constants.dart';
+//import '../../../routes/routes.dart';
 
 class LatestNovelWidget extends StatefulWidget {
-  LatestNovelWidget({super.key});
+  const LatestNovelWidget({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -39,7 +39,7 @@ class LatestNovelWidgetState extends State<LatestNovelWidget> {
               shrinkWrap: true,
               itemCount: novelList.length,
               itemBuilder: (context, index) {
-                return NovelCard(novelList[index] as novelModel);
+                return NovelCard(novelList[index] as NovelModel);
               },
             )
             //     for (int i = 0; i <= 6; i++)
@@ -56,11 +56,12 @@ class LatestNovelWidgetState extends State<LatestNovelWidget> {
     //final uid = AuthService()
     var data = await FirebaseFirestore.instance
         .collection('Requests')
+        //.where('rquser', isEqualTo: )
         .orderBy("time", descending: true)
         .get();
     setState(() {
       novelList =
-          List.from(data.docs.map((doc) => novelModel.fromSnapshot(doc)));
+          List.from(data.docs.map((doc) => NovelModel.fromSnapshot(doc)));
     });
   }
 }

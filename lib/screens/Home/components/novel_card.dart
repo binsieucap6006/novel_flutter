@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:novel_flutter/models/novelModel.dart';
+//import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:novel_flutter/models/novel_model.dart';
 
 import '../../../constants.dart';
-import '../../../routes/routes.dart';
-import '../../details_page.dart';
+import '../../Details/details_page.dart';
+//import '../../../routes/routes.dart';
 
 class NovelCard extends StatelessWidget {
-  final novelModel novel;
-  NovelCard(this.novel);
+  final NovelModel novel;
+  NovelCard(this.novel, {super.key});
 
-  String novelId = '';
-  DocumentReference documentReference =
+  final String novelId = '';
+  final DocumentReference documentReference =
       FirebaseFirestore.instance.collection("Requests").doc();
   @override
   Widget build(BuildContext context) {
@@ -34,11 +34,11 @@ class NovelCard extends StatelessWidget {
             ]),
         child: Row(children: [
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Container(
               alignment: Alignment.center,
               child: Image.network(
-                "${novel.Image}",
+                "${novel.image}",
                 height: 120,
                 width: 120,
                 fit: BoxFit.fill,
@@ -54,27 +54,27 @@ class NovelCard extends StatelessWidget {
                 Flexible(
                   child: RichText(
                     overflow: TextOverflow.ellipsis,
-                    strutStyle: StrutStyle(fontSize: 12.0),
+                    strutStyle: const StrutStyle(fontSize: 12.0),
                     text: TextSpan(
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: kPrimaryColor,
                         ),
-                        text: '${novel.Name}'),
+                        text: '${novel.name}'),
                   ),
                 ),
 
                 Flexible(
                   child: RichText(
                     overflow: TextOverflow.ellipsis,
-                    strutStyle: StrutStyle(fontSize: 12.0),
+                    strutStyle: const StrutStyle(fontSize: 12.0),
                     text: TextSpan(
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           color: kPrimaryColor,
                         ),
-                        text: '${novel.Description}'),
+                        text: '${novel.description}'),
                   ),
                 ),
 
@@ -102,6 +102,12 @@ class NovelCard extends StatelessWidget {
                         builder: (context) => DetailsPage(novel),
                       ),
                     );
+                    novel.viewCount = novel.viewCount! + 1;
+                    int currentView = novel.viewCount!;
+                    FirebaseFirestore.instance
+                        .collection('Requests')
+                        .doc(novel.id)
+                        .update({'viewcount': currentView});
                   },
                   child: const Text(
                     'READ NOW',

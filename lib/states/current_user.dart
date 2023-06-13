@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:novel_flutter/models/userModel.dart';
 
 class CurrentUser extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;

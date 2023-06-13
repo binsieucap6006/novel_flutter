@@ -1,10 +1,8 @@
-import 'dart:ffi';
-import 'package:novel_flutter/models/novelModel.dart';
+import 'package:novel_flutter/models/novel_model.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:novel_flutter/constants.dart';
 import 'package:novel_flutter/screens/Admin/components/request_card.dart';
 import '../../../components/background.dart';
@@ -36,7 +34,7 @@ class _RequestManagementScreenState extends State<RequestManagementScreen> {
         .get();
     setState(() {
       novelList =
-          List.from(data.docs.map((doc) => novelModel.fromSnapshot(doc)));
+          List.from(data.docs.map((doc) => NovelModel.fromSnapshot(doc)));
     });
   }
 
@@ -45,7 +43,9 @@ class _RequestManagementScreenState extends State<RequestManagementScreen> {
     return Background(
       child: Column(
         children: [
-          NavBar(),
+          const NavBar(
+            title: 'Requests management',
+          ),
           const SizedBox(
             height: 30,
           ),
@@ -69,7 +69,7 @@ class _RequestManagementScreenState extends State<RequestManagementScreen> {
                 shrinkWrap: true,
                 itemCount: novelList.length,
                 itemBuilder: (context, index) {
-                  return RequestCard(novelList[index] as novelModel);
+                  return RequestCard(novelList[index] as NovelModel);
                 },
               ),
             ),
@@ -87,17 +87,13 @@ class NoRequestStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Text(
-            'There is no request at the moment :((',
-            style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: kPrimaryColor),
-          ),
+    return const Center(
+      child: Padding(
+        padding: EdgeInsets.all(25.0),
+        child: Text(
+          'There is no request at the moment :((',
+          style: TextStyle(
+              fontSize: 30, fontWeight: FontWeight.bold, color: kPrimaryColor),
         ),
       ),
     );

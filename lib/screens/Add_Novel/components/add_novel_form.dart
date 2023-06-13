@@ -10,9 +10,10 @@ import 'package:dropdown_search/dropdown_search.dart';
 
 class AddNovelForm extends StatefulWidget {
   const AddNovelForm({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
+  //String novelId;
   @override
   State<StatefulWidget> createState() {
     return _AddNovelFormState();
@@ -156,7 +157,7 @@ class _AddNovelFormState extends State<AddNovelForm> {
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Upload success!')));
                 } catch (error) {
-                  print(error);
+                  //print(error);
                 }
               },
               icon: const Icon(Icons.camera_alt)),
@@ -171,7 +172,6 @@ class _AddNovelFormState extends State<AddNovelForm> {
                     const SnackBar(content: Text('Submit success!')));
                 Navigator.of(context).pushNamed("/");
               }
-              //if (key.currentState!.validate()) {
               String uniqueFileName =
                   DateTime.now().millisecondsSinceEpoch.toString();
               String novelName = _novelNameController.text;
@@ -185,16 +185,15 @@ class _AddNovelFormState extends State<AddNovelForm> {
                 'rquser': getUID(),
                 'rqgenre': selectedGenre!,
                 'time': int.parse(uniqueFileName),
-                'chapterNum': 0
-                //'rqid': '',
+                'chapterNum': 0,
+                'viewcount': 0
               };
-
               //Add a new item
               try {
                 _reference.add(dataToSend).then(
                   (DocumentReference doc) async {
                     rqID = doc.id;
-                    print(doc.id);
+                    //print(doc.id);
                     await FirebaseFirestore.instance
                         .collection("Requests")
                         .doc(rqID)
@@ -204,8 +203,6 @@ class _AddNovelFormState extends State<AddNovelForm> {
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Novel created.')));
               } catch (e) {}
-
-              //}
             },
             child: const Text('Submit'),
           ),

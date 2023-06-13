@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:novel_flutter/widget/trending_item_widget.dart';
-
-import '../components/background.dart';
-import '../constants.dart';
-import 'Home/components/header_widget.dart';
+import '../../components/background.dart';
+import '../../constants.dart';
+import 'components/trending_item_widget.dart';
 
 class TrendingPage extends StatelessWidget {
   const TrendingPage({super.key});
@@ -13,7 +11,7 @@ class TrendingPage extends StatelessWidget {
     return Background(
         child: ListView(
       children: const [
-        HeaderWidget(),
+        //HeaderWidget(),
         Padding(
           padding: EdgeInsets.all(20),
           child: Text(

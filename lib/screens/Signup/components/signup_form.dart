@@ -174,7 +174,7 @@ class _SignUpFormState extends State<SignUpForm> {
           const SizedBox(height: defaultPadding / 2),
           ElevatedButton(
             onPressed: () async {
-              if (_passwordController.text != null &&
+              if (_passwordController.text != '' &&
                   _passwordController.text == _confirmPasswordController.text) {
                 signUpUser();
               } else {

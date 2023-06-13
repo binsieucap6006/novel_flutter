@@ -105,7 +105,7 @@ class _LoginFormState extends State<LoginForm> {
             tag: "login_btn",
             child: ElevatedButton(
               onPressed: () {
-                if (_passwordController == '') {
+                if (_passwordController.text == '') {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text("Please fill in email and password"),
@@ -135,25 +135,21 @@ class _LoginFormState extends State<LoginForm> {
 
   void route() {
     User? user = FirebaseAuth.instance.currentUser;
-    var kk = FirebaseFirestore.instance
-        .collection('Users')
-        .doc(user!.uid)
-        .get()
-        .then(
+    FirebaseFirestore.instance.collection('Users').doc(user!.uid).get().then(
       (DocumentSnapshot documentSnapshot) {
         if (documentSnapshot.exists) {
           if (documentSnapshot.get('admin')) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => AdminScreen(),
+                builder: (context) => const AdminScreen(),
               ),
             );
           } else {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomePage(),
+                builder: (context) => const HomePage(),
               ),
             );
           }

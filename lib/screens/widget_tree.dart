@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:novel_flutter/screens/Add_Novel/add_novel_screen.dart';
+//import 'package:novel_flutter/screens/Add_Novel/add_novel_screen.dart';
 
 import 'package:novel_flutter/states/current_user.dart';
 
 import 'Admin/admin_screen.dart';
-import 'Home/home_page.dart';
+import 'Home/components/appbar_widget.dart';
 import 'Welcome/welcome_screen.dart';
 
 class WidgetTree extends StatefulWidget {
@@ -16,31 +16,54 @@ class WidgetTree extends StatefulWidget {
 }
 
 class _WidgetTreeState extends State<WidgetTree> {
+  int index = 1;
+
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: CurrentUser().authStateChange,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          if (route() == 1) {
-            return AdminScreen();
+    return Scaffold(
+      //bottomNavigationBar: buildBottomBar(),
+      body: StreamBuilder(
+        stream: CurrentUser().authStateChange,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            if (route() == 1) {
+              return const AdminScreen();
+            } else {
+              return const SimpleAppBarPage();
+            }
           } else {
-            return HomePage();
+            return const WelcomeScreen();
           }
-        } else {
-          return const WelcomeScreen();
-        }
-      },
+        },
+      ),
+    );
+  }
+
+  Widget buildBottomBar() {
+    const style = TextStyle(color: Colors.white);
+
+    return BottomNavigationBar(
+      backgroundColor: Colors.purple,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.white70,
+      currentIndex: index,
+      items: const [
+        BottomNavigationBarItem(
+          icon: Text('AppBar', style: style),
+          label: 'Transparent',
+        ),
+        BottomNavigationBarItem(
+          icon: Text('AppBar', style: style),
+          label: 'Transparent',
+        ),
+      ],
+      onTap: (int index) => setState(() => this.index = index),
     );
   }
 
   int route() {
     User? user = FirebaseAuth.instance.currentUser;
-    var kk = FirebaseFirestore.instance
-        .collection('Users')
-        .doc(user!.uid)
-        .get()
-        .then(
+    FirebaseFirestore.instance.collection('Users').doc(user!.uid).get().then(
       (DocumentSnapshot documentSnapshot) {
         if (documentSnapshot.exists) {
           if (documentSnapshot.get('admin')) {

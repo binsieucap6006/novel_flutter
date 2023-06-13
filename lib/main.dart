@@ -5,7 +5,6 @@ import 'package:novel_flutter/routes/app_pages.dart';
 import 'package:novel_flutter/screens/widget_tree.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'screens/Home/home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,16 +23,16 @@ Future<void> main() async {
 }
 
 class MyApp extends StatefulWidget {
-  FirebaseApp app;
-  MyApp({super.key, required this.app});
-  static const String title = 'Novel';
+  final FirebaseApp app;
+  const MyApp({super.key, required this.app});
+  static const String title = 'Novel Hovel';
   //const MyApp({super.key});
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.transparent,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
@@ -56,9 +55,9 @@ class MyApp extends StatefulWidget {
           ),
         ),
       ),
-      routes: {
-        "/": (context) => HomePage(),
-      },
+      // routes: {
+      //   "/": (context) => const HomePage(),
+      // },
     );
   }
 

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:novel_flutter/constants.dart';
 import '../../components/background.dart';
 
-import '../Home/components/navbar_widget.dart';
-import '../details_page.dart';
 
 class BookmarkScreen extends StatelessWidget {
   const BookmarkScreen({Key? key}) : super(key: key);
@@ -13,17 +11,19 @@ class BookmarkScreen extends StatelessWidget {
     return Background(
       child: ListView(
         children: [
-          const NavBar(),
+          // const NavBar(
+          //   title: 'Your Favourites',
+          // ),
           const SizedBox(
             height: 50,
           ),
           //UploadNovelList(),
-          Padding(
-            padding: const EdgeInsets.all(1),
+          const Padding(
+            padding: EdgeInsets.all(1),
             child: Column(
-              children: const [
+              children: [
                 Text(
-                  'Bookmarked',
+                  ' Favorite Novels',
                   style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
