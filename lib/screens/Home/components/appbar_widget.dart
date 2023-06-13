@@ -15,7 +15,7 @@ import '../../Trending/trending_page.dart';
 
 enum SampleItem {
   logout,
-  setting,
+  profile,
   uploadNovel,
   bookmarked,
   //uploaded,
@@ -181,8 +181,8 @@ class _SimpleAppBarPageState extends State<SimpleAppBarPage> {
                               ],
                             ),
                           );
-                        } else if (selectedItem == SampleItem.setting) {
-                          Navigator.of(context).pushNamed('/');
+                        } else if (selectedItem == SampleItem.profile) {
+                          Navigator.of(context).pushNamed(Routes.PROFILE);
                         } else if (selectedItem == SampleItem.uploadNovel) {
                           Navigator.of(context).pushNamed(Routes.ADD_NOVEL);
                         } else if (selectedItem == SampleItem.bookmarked) {
@@ -200,8 +200,8 @@ class _SimpleAppBarPageState extends State<SimpleAppBarPage> {
                           child: Text('Log out'),
                         ),
                         const PopupMenuItem<SampleItem>(
-                          value: SampleItem.setting,
-                          child: Text('Setting'),
+                          value: SampleItem.profile,
+                          child: Text('Profile'),
                         ),
                         const PopupMenuItem<SampleItem>(
                           value: SampleItem.uploadNovel,

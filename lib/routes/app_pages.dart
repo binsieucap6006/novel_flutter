@@ -4,7 +4,9 @@ import 'package:novel_flutter/screens/Admin/admin_screen.dart';
 import 'package:novel_flutter/screens/Admin/request_management_screen.dart';
 import 'package:novel_flutter/screens/Admin/user_management_screen.dart';
 import 'package:novel_flutter/screens/Bookmark/bookmark_screen.dart';
+import 'package:novel_flutter/screens/Home/components/appbar_widget.dart';
 import 'package:novel_flutter/screens/Login/login_screen.dart';
+import 'package:novel_flutter/screens/Profile/profile_screen.dart';
 import 'package:novel_flutter/screens/Signup/signup_screen.dart';
 import 'package:novel_flutter/screens/Uploaded_Novels/upload_novels_screen.dart';
 import 'package:novel_flutter/screens/Welcome/welcome_screen.dart';
@@ -16,7 +18,7 @@ class AppRouter {
   Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case "/":
-        return MaterialPageRoute(builder: (_) => const HomePage());
+        return MaterialPageRoute(builder: (_) => const SimpleAppBarPage());
       case "/login":
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case "/sign-up":
@@ -40,6 +42,8 @@ class AppRouter {
             builder: (_) => const RequestManagementScreen());
       case "/user-manage":
         return MaterialPageRoute(builder: (_) => const UserManagementScreen());
+      case "/profile":
+        return MaterialPageRoute(builder: (_) => ProfilePage());
     }
     return null;
   }

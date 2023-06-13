@@ -13,6 +13,8 @@ abstract class _Paths {
   //static const String DETAILS = '/details';
   static const String ADD_NOVEL = '/add-novel';
   static const String RQ_MANAGE = '/rq-manage';
+  static const String PROFILE = '/profile';
+
   static const String USER_MANAGE = '/user-manage';
 }
 
@@ -30,4 +32,5 @@ abstract class Routes {
   static const String ADD_NOVEL = _Paths.ADD_NOVEL;
   static const String USER_MANAGE = _Paths.USER_MANAGE;
   static const String RQ_MANAGE = _Paths.RQ_MANAGE;
+  static const String PROFILE = _Paths.PROFILE;
 }
