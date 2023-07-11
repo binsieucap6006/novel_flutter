@@ -133,8 +133,6 @@ class _AddNovelFormState extends State<AddNovelForm> {
 
                 if (file == null) return;
                 //Import dart:core
-                String uniqueFileName =
-                    DateTime.now().millisecondsSinceEpoch.toString();
 
                 /*Step 2: Upload to Firebase storage*/
                 //Install firebase_storage
@@ -145,6 +143,8 @@ class _AddNovelFormState extends State<AddNovelForm> {
                 Reference referenceDirImages = referenceRoot.child('img');
 
                 //Create a reference for the image to be stored
+                String uniqueFileName =
+                    DateTime.now().millisecondsSinceEpoch.toString();
                 Reference referenceImageToUpload =
                     referenceDirImages.child(uniqueFileName);
 

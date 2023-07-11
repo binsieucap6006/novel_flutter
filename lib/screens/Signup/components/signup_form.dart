@@ -29,20 +29,28 @@ class _SignUpFormState extends State<SignUpForm> {
       TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? get currentUser => _auth.currentUser;
+  Future<bool> signUpUserAuth(
+      {required String email, required String password}) async {
+    await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    return true;
+  }
 
   Future<String?> signUpUser() async {
     try {
-      await CurrentUser().signUpUser(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      await addUser();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Sign up success"),
-          duration: Duration(seconds: 2),
-        ),
-      );
+      if (await signUpUserAuth(
+              email: _emailController.text,
+              password: _passwordController.text) ==
+          true) {
+        addUser();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Sign up success"),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+
       Navigator.of(context).pushNamed("/");
     } on FirebaseAuthException catch (e) {
       if (e.code == "weak-password") {

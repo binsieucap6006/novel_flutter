@@ -258,11 +258,13 @@ class _HeaderSearchScreenState extends State<HeaderSearchScreen> {
     //final uid = AuthService()
     var data = await FirebaseFirestore.instance
         .collection('Requests')
-        .where("rqname", isGreaterThanOrEqualTo: inputTxt)
+        .where("rqname", isEqualTo: inputTxt)
         .get();
-    setState(() {
-      novelList =
-          List.from(data.docs.map((doc) => NovelModel.fromSnapshot(doc)));
-    });
+    setState(
+      () {
+        novelList =
+            List.from(data.docs.map((doc) => NovelModel.fromSnapshot(doc)));
+      },
+    );
   }
 }

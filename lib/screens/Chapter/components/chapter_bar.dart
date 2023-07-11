@@ -70,7 +70,7 @@ class _ChapterBarState extends State<ChapterBar> {
               ),
             );
           },
-          icon: const Icon(Icons.home),
+          icon: const Icon(Icons.arrow_forward_ios),
         )
       ],
       backgroundColor: kPrimaryColor,

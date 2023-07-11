@@ -15,7 +15,6 @@ class TrendingNovelWidget extends StatelessWidget {
         child: Row(
           children: [
             //Single Item
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Container(
@@ -64,19 +63,7 @@ class TrendingNovelWidget extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        onPressed: () {
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //     builder: (context) => DetailsPage(
-                          //       "Greatest Novel Ever",
-                          //       "Greatest Novel Ever",
-                          //       "Greatest Novel Ever",
-                          //       "Greatest Novel Ever",
-                          //       "Greatest Novel Ever",
-                          //     ),
-                          //   ),
-                          // );
-                        },
+                        onPressed: () {},
                         child: const Text(
                           'READ NOW',
                           style: TextStyle(

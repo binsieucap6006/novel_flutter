@@ -15,11 +15,11 @@ dependencies:
   flutter_svg: ^1.1.0
   firebase_auth: ^4.6.1
   firebase_core:
+  cloud_firestore:
   firebase_crashlytics:
   firebase_messaging:
   firebase_storage:
   provider:
-  cloud_firestore:
   google_sign_in:
   image_picker: ^0.8.7+5
   file_picker:

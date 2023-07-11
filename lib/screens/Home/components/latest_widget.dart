@@ -6,6 +6,8 @@ import 'package:novel_flutter/screens/Home/components/novel_card.dart';
 //import 'package:novel_flutter/screens/details_page.dart';
 import 'package:novel_flutter/models/novel_model.dart';
 
+import '../../../constants.dart';
+
 //import '../../../constants.dart';
 //import '../../../routes/routes.dart';
 
@@ -39,7 +41,14 @@ class LatestNovelWidgetState extends State<LatestNovelWidget> {
               shrinkWrap: true,
               itemCount: novelList.length,
               itemBuilder: (context, index) {
-                return NovelCard(novelList[index] as NovelModel);
+                if (novelList.isNotEmpty) {
+                  return NovelCard(novelList[index] as NovelModel);
+                } else {
+                  return Center(
+                      child: CircularProgressIndicator(
+                    color: kPrimaryColor,
+                  ));
+                }
               },
             )
             //     for (int i = 0; i <= 6; i++)

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:novel_flutter/models/chapterModel.dart';
 import 'package:novel_flutter/models/novel_model.dart';
@@ -26,6 +27,82 @@ class _DetailsPageState extends State<DetailsPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     getChapterList();
+  }
+
+  bool _isFavorited = false;
+  void pressFavorite() {
+    setState(() {
+      if (_isFavorited) {
+        delFavorite();
+        _isFavorited = false;
+      } else {
+        addFavorite();
+        _isFavorited = true;
+      }
+    });
+  }
+
+  //bool exist = false;
+  bool checkExist() {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      FirebaseFirestore.instance
+          .collection('Users')
+          .doc(user!.uid)
+          .collection('Bookmark')
+          .doc(widget.novel.id)
+          .get()
+          .then((doc) {
+        _isFavorited = doc.exists;
+      });
+
+      return _isFavorited;
+    } catch (e) {
+      setState(() {
+        _isFavorited = false;
+      });
+      // If any error
+      return _isFavorited = false;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkExist();
+    //pressFavorite();
+  }
+
+  addFavorite() async {
+    try {
+      var dataRef = await FirebaseFirestore.instance.collection('Users');
+      User? user = FirebaseAuth.instance.currentUser;
+      var bookmark = dataRef
+          .doc(user!.uid)
+          .collection('Bookmark')
+          .doc(widget.novel.id)
+          .set(
+        {
+          'name': widget.novel.name,
+          'id': widget.novel.id,
+          'genre': widget.novel.genre,
+          'description': widget.novel.description,
+          'user': user.uid,
+        },
+      );
+    } catch (e) {}
+  }
+
+  delFavorite() async {
+    try {
+      var dataRef = await FirebaseFirestore.instance.collection('Users');
+      User? user = FirebaseAuth.instance.currentUser;
+      var bookmark = dataRef
+          .doc(user!.uid)
+          .collection('Bookmark')
+          .doc(widget.novel.id)
+          .delete();
+    } catch (e) {}
   }
 
   @override
@@ -118,23 +195,31 @@ class _DetailsPageState extends State<DetailsPage> {
                           //Navigator.of(context).pushNamed(Routes.BOOKMARKED);
                           print(widget.novel.id);
                         },
-                        child: const Padding(
+                        child: Padding(
                           padding: EdgeInsets.only(left: 40),
-                          child: Icon(
-                            Icons.favorite_border,
-                            size: 40,
-                            color: kPrimaryColor,
+                          child: InkWell(
+                            child: IconButton(
+                              icon: (_isFavorited
+                                  ? Icon(Icons.favorite, size: 40)
+                                  : Icon(Icons.favorite_border, size: 40)),
+                              onPressed: () {
+                                pressFavorite();
+                                print(_isFavorited);
+                              },
+                              // Icons.favorite_border,
+                              color: kPrimaryColor,
+                            ),
                           ),
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 240),
-                        child: Icon(
-                          Icons.thumb_up,
-                          size: 40,
-                          color: kPrimaryColor,
-                        ),
-                      ),
+                      // const Padding(
+                      //   padding: EdgeInsets.only(left: 240),
+                      //   child: Icon(
+                      //     Icons.thumb_up,
+                      //     size: 40,
+                      //     color: kPrimaryColor,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

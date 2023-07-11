@@ -52,7 +52,7 @@ class _UploadNovelScreenState extends State<UploadNovelScreen> {
           });
           return handleRefresh();
         },
-        child: ListView(
+        child: Column(
           children: [
             // const NavBar(
             //   title: 'Uploaded page',

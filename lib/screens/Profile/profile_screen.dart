@@ -11,6 +11,7 @@ import 'package:novel_flutter/components/background.dart';
 import 'package:novel_flutter/constants.dart';
 import 'package:novel_flutter/routes/routes.dart';
 import 'package:novel_flutter/screens/Profile/change_pw_screen.dart';
+import 'package:novel_flutter/screens/Profile/delete_account_screen.dart';
 import '../../models/userModel.dart';
 import '../../states/Current_User.dart';
 import 'components/appbar_widget.dart';
@@ -97,6 +98,34 @@ class _ProfilePageState extends State<ProfilePage> {
       );
       // ScaffoldMessenger.of(context)
       //     .showSnackBar(const SnackBar(content: Text('Novel created.')));
+    } catch (e) {}
+  }
+
+  Future<void> deleteUserAuth(String currentPassword) async {
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    final cred = EmailAuthProvider.credential(
+        email: _auth.currentUser!.email!, password: currentPassword);
+    _auth.currentUser!.reauthenticateWithCredential(cred).then((value) {
+      _auth.currentUser!.delete().then((value) async {
+        await CurrentUser().signOutUser();
+        Navigator.of(context).pushNamed(Routes.WELCOME);
+      });
+    });
+    await _auth.currentUser!.delete();
+    //route();
+    deleteUser();
+    CurrentUser().signOutUser();
+    Navigator.of(context).pushNamed(Routes.WELCOME);
+  }
+
+  deleteUser() {
+    try {
+      FirebaseAuth _auth = FirebaseAuth.instance;
+
+      var userRef = FirebaseFirestore.instance
+          .collection('Users')
+          .doc(_auth.currentUser!.uid)
+          .delete();
     } catch (e) {}
   }
 
@@ -320,11 +349,17 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             const SizedBox(height: 20),
                             InkWell(
-                              onTap: () {},
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.red),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            DeleteAccountPage()),
+                                  );
+                                },
                                 child: Text('Delete account'.toUpperCase()),
                               ),
                             ),
@@ -396,7 +431,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 );
               } else {
-                return CircularProgressIndicator();
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: kPrimaryColor,
+                ));
               }
             }),
       ),

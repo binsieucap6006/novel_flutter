@@ -8,16 +8,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final FirebaseApp app = await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: 'AIzaSyA5NgoI83fRIy5aLgibCaP2tDBLXzBZCec',
-      appId: "Novel Hovel",
-      messagingSenderId: '445637014017',
-      projectId: 'novelhovel-8a04e',
-    ),
-  );
+  final FirebaseApp app = await Firebase.initializeApp();
+  // options: const FirebaseOptions(
+  //   apiKey: 'AIzaSyA5NgoI83fRIy5aLgibCaP2tDBLXzBZCec',
+  //   appId: "Novel Hovel",
+  //   messagingSenderId: '445637014017',
+  //   projectId: 'novelhovel-8a04e',
+  // ),
+  //);
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-
   //runApp(const MyApp());
   runApp(ProviderScope(child: MyApp(app: app)));
 }

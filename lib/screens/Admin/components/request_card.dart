@@ -36,8 +36,8 @@ class RequestCard extends StatelessWidget {
         FutureBuilder(
           future: getUsernamebyId(novel.user!),
           builder: ((context, snapshot) => CategoryCard(
-                typeReqest: requestType("0"),
-                sender: "snapshot.data",
+                //typeReqest: requestType("0"),
+                //sender: "snapshot.data",
                 nameNovel: novel.name!,
                 typeNovel: novel.genre!,
                 descriptionNovel: novel.description!,
@@ -61,8 +61,8 @@ class RequestCard extends StatelessWidget {
 }
 
 class CategoryCard extends StatelessWidget {
-  final String typeReqest;
-  final String? sender;
+  //final String typeReqest;
+  //final String? sender;
   final String nameNovel;
   final String typeNovel;
   final String descriptionNovel;
@@ -70,8 +70,8 @@ class CategoryCard extends StatelessWidget {
 
   const CategoryCard({
     super.key,
-    required this.typeReqest,
-    required this.sender,
+    //required this.typeReqest,
+    //required this.sender,
     required this.nameNovel,
     required this.typeNovel,
     required this.descriptionNovel,
@@ -93,26 +93,26 @@ class CategoryCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Request: $typeReqest',
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: kPrimaryColor),
-                    ),
-                    Flexible(
-                      child: RichText(
-                        overflow: TextOverflow.ellipsis,
-                        strutStyle: const StrutStyle(fontSize: 12.0),
-                        text: TextSpan(
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: kPrimaryColor,
-                            ),
-                            text: 'Sender: $sender'),
-                      ),
-                    ),
+                    // Text(
+                    //   'Request: $typeReqest',
+                    //   style: const TextStyle(
+                    //       fontSize: 20,
+                    //       fontWeight: FontWeight.bold,
+                    //       color: kPrimaryColor),
+                    // ),
+                    // Flexible(
+                    //   child: RichText(
+                    //     overflow: TextOverflow.ellipsis,
+                    //     strutStyle: const StrutStyle(fontSize: 12.0),
+                    //     text: TextSpan(
+                    //         style: const TextStyle(
+                    //           fontSize: 20,
+                    //           fontWeight: FontWeight.bold,
+                    //           color: kPrimaryColor,
+                    //         ),
+                    //         text: 'Sender: $sender'),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -202,7 +202,7 @@ class CategoryCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(32.0)),
                       ),
                       onPressed: () {},
-                      child: const Text('Accept'),
+                      child: const Text('Edit'),
                     ),
                   ),
                   SizedBox(

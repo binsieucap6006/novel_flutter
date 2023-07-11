@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:novel_flutter/screens/Admin/admin_screen.dart';
+import 'package:novel_flutter/screens/Home/components/appbar_widget.dart';
 import 'package:novel_flutter/screens/Home/home_page.dart';
 import 'package:novel_flutter/states/Current_User.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -149,7 +150,7 @@ class _LoginFormState extends State<LoginForm> {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const HomePage(),
+                builder: (context) => const SimpleAppBarPage(),
               ),
             );
           }

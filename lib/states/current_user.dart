@@ -9,23 +9,28 @@ class CurrentUser extends ChangeNotifier {
   // UserModel? userModel(User user) {
   //   return user != null ? UserModel(email: user.email, uid: user.uid) : null;
   // }
-
   Stream<User?> get authStateChange => _auth.authStateChanges();
-  bool isLogin = false;
-  Future<void> signUpUser(
+  Future<bool> signUpUser(
       {required String email, required String password}) async {
-    await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
+    try {
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   Future<void> loginUser(
       {required String email, required String password}) async {
     await _auth.signInWithEmailAndPassword(email: email, password: password);
-    //return isLogin = true;
   }
 
   Future<void> signOutUser() async {
     await _auth.signOut();
-    //return isLogin = false;
+  }
+
+  Future<void> deleteUser() async {
+    await _auth.currentUser!.delete();
   }
 }
